@@ -93,3 +93,9 @@ In this call you describe your situation and we agree on the next steps. It does
 More about the firm: [About us](https://www.cryptotax.ch/en/about-us/)
 
 Swiss CryptoTax works together with [Lenherr & Partner AG](https://www.lenherr-partner.ch/).
+
+## GitHub activity
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/isocalendar.svg" alt="Contribution calendar of swiss-cryptotax on GitHub for the last twelve months">
+</p>

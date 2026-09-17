@@ -34,7 +34,7 @@ jobs:
           ref: metrics
 
       # No "id" on metrics steps: the action derives its docker image source from github.action.
-      # The blog feed card reads only the public RSS feed. No GitHub token is passed.
+      # The blog feed card reads only the public RSS feed. No GitHub token is passed to it.
       - name: Render blog feed card
         uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
         with:
@@ -57,6 +57,71 @@ jobs:
       - name: Commit blog feed card if changed
         env:
           CARD: blog-feed.svg
+        run: |
+          set -euo pipefail
+          test -s "/metrics_renders/$CARD"
+          cp "/metrics_renders/$CARD" "$CARD"
+          git add "$CARD"
+          rc=0
+          git diff --cached --quiet || rc=$?
+          case "$rc" in
+            0) echo "$CARD unchanged."; exit 0 ;;
+            1) ;;
+            *) echo "git diff failed with exit code $rc"; exit "$rc" ;;
+          esac
+          git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update $CARD"
+          git push origin HEAD:metrics
+
+      # The calendar needs a classic personal access token without scopes (secret METRICS_TOKEN).
+      # Without the secret the calendar is skipped; a token with scopes stops the job.
+      - name: Check METRICS_TOKEN
+        id: token
+        env:
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${METRICS_TOKEN:-}" ]; then
+            echo "::warning::Secret METRICS_TOKEN is not set. The contribution calendar was not updated."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          headers=$(curl -fsSI -H "Authorization: token ${METRICS_TOKEN}" https://api.github.com/)
+          rc=0
+          scopes=$(printf '%s\n' "$headers" | tr -d '\r' | awk 'tolower($1) == "x-oauth-scopes:" { found = 1; sub(/^[^:]*:[ \t]*/, ""); print } END { if (!found) exit 3 }') || rc=$?
+          if [ "$rc" -eq 3 ]; then
+            echo "::error::No x-oauth-scopes header. METRICS_TOKEN must be a classic personal access token."
+            exit 1
+          fi
+          if [ "$rc" -ne 0 ]; then
+            exit "$rc"
+          fi
+          if [ -n "$scopes" ]; then
+            echo "::error::METRICS_TOKEN has scopes ($scopes). Use a classic token without scopes."
+            exit 1
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+
+      - name: Render contribution calendar card
+        if: steps.token.outputs.ready == 'true'
+        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
+        with:
+          filename: isocalendar.svg
+          output_action: none
+          token: ${{ secrets.METRICS_TOKEN }}
+          committer_token: NOT_NEEDED
+          user: swiss-cryptotax
+          base: ""
+          notice_releases: no
+          plugins_errors_fatal: yes
+          config_animations: no
+          config_timezone: Europe/Zurich
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+
+      - name: Commit contribution calendar card if changed
+        if: steps.token.outputs.ready == 'true'
+        env:
+          CARD: isocalendar.svg
         run: |
           set -euo pipefail
           test -s "/metrics_renders/$CARD"
