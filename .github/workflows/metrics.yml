@@ -1,8 +1,8 @@
-name: Blog feed card
+name: Metrics cards
 
-# Renders the latest posts of the cryptotax.ch blog with lowlighter/metrics
-# and commits assets/metrics/blog-feed.svg when the list has changed.
-# Only the public RSS feed is read. No GitHub token is passed to metrics.
+# Renders the SVG cards shown in README.md with lowlighter/metrics and
+# commits them to the branch "metrics" when they have changed.
+# Commits outside the default branch do not count as contributions.
 
 on:
   schedule:
@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: blog-feed-card
+  group: metrics-cards
   cancel-in-progress: false
 
 jobs:
@@ -28,10 +28,13 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Check out repository
+      - name: Check out branch metrics
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: metrics
 
-      # No "id" on this step: the action derives its docker image source from github.action.
+      # No "id" on metrics steps: the action derives its docker image source from github.action.
+      # The blog feed card reads only the public RSS feed. No GitHub token is passed.
       - name: Render blog feed card
         uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
         with:
@@ -51,18 +54,20 @@ jobs:
           plugin_rss_source: https://www.cryptotax.ch/en/blog-en/feed/
           plugin_rss_limit: 4
 
-      - name: Commit card if changed
+      - name: Commit blog feed card if changed
+        env:
+          CARD: blog-feed.svg
         run: |
           set -euo pipefail
-          test -s /metrics_renders/blog-feed.svg
-          cp /metrics_renders/blog-feed.svg assets/metrics/blog-feed.svg
-          git add assets/metrics/blog-feed.svg
+          test -s "/metrics_renders/$CARD"
+          cp "/metrics_renders/$CARD" "$CARD"
+          git add "$CARD"
           rc=0
           git diff --cached --quiet || rc=$?
           case "$rc" in
-            0) echo "Blog feed card unchanged."; exit 0 ;;
+            0) echo "$CARD unchanged."; exit 0 ;;
             1) ;;
             *) echo "git diff failed with exit code $rc"; exit "$rc" ;;
           esac
-          git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update blog feed card"
-          git push origin HEAD:main
+          git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update $CARD"
+          git push origin HEAD:metrics

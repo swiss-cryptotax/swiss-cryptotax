@@ -75,7 +75,7 @@ If you already have a tax advisor or trustee, we work together with them on requ
 ## Latest articles
 
 <a href="https://www.cryptotax.ch/en/blog-en/">
-  <img src="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/main/assets/metrics/blog-feed.svg" width="100%" alt="Latest articles from the Swiss CryptoTax blog">
+  <img src="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/blog-feed.svg" width="100%" alt="Latest articles from the Swiss CryptoTax blog">
 </a>
 
 The list is refreshed daily from the [blog on cryptotax.ch](https://www.cryptotax.ch/en/blog-en/).
