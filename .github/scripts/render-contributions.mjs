@@ -186,6 +186,8 @@ const a = Math.round(((BREITE - RAND_LINKS - RAND_RECHTS) / (spalten + 7)) * 100
 const b = a / 2
 const H_MAX = a * 1.8                      // höchste Säule
 const SOCKEL = a * 0.2                     // jeder Tag mit Beiträgen ist sichtbar erhoben
+const FUGE = 0.93                          // Fuge zwischen den Bloecken: ein leerer Tag bleibt ein Tag
+const ZA = a * FUGE, ZB = b * FUGE
 const X0 = RAND_LINKS + 7 * a              // linkester Punkt des Gitters liegt auf RAND_LINKS
 const Y0 = OBEN + H_MAX + b                // oberster Punkt der höchsten Säule liegt auf OBEN
 const BODEN = Y0 + (spalten + 6) * b       // tiefster Punkt des Gitters
@@ -196,9 +198,12 @@ const HOEHE = Math.round(legendeY + 44)
 // does not flatten every other block into the floor.
 const saeule = count => count <= 0 || hoechst <= 0 ? 0 : SOCKEL + (H_MAX - SOCKEL) * Math.pow(count / hoechst, 0.7)
 
-// Lid, left face, right face of one block. A block of height 0 is a floor tile
-// and has no side faces: two faces of zero area would still cost bytes and
-// would make "this day has contributions" unreadable from the geometry.
+// Lid, left face, right face of one block. The drawn rhombus is a little
+// smaller than the step of the grid, so two neighbouring days keep a seam: a
+// week without contributions has to stay readable as seven days, not as one
+// slab. A block of height 0 is a floor tile and has no side faces: two faces of
+// zero area would still cost bytes and would make "this day has contributions"
+// unreadable from the geometry.
 const block = (x, y, halb, halbH, h, s) => {
   const deckel = `<path class="o${s}" d="M${n2(x)},${n2(y - halbH - h)} ${n2(x + halb)},${n2(y - h)} ${n2(x)},${n2(y + halbH - h)} ${n2(x - halb)},${n2(y - h)}Z"`
   if (h <= 0)
@@ -222,7 +227,7 @@ const nachTiefe = tage
 let bloecke = ""
 for (const {tag, c, r} of nachTiefe) {
   const s = stufe(tag.count)
-  const {seiten, deckel} = block(X0 + (c - r) * a, Y0 + (c + r) * b, a, b, saeule(tag.count), s)
+  const {seiten, deckel} = block(X0 + (c - r) * a, Y0 + (c + r) * b, ZA, ZB, saeule(tag.count), s)
   const titel = `${tag.count === 0 ? "No contributions" : `${zahl(tag.count)} contribution${tag.count === 1 ? "" : "s"}`} on ${langDatum(tag.iso)}`
   bloecke += `\n    ${seiten}${deckel}><title>${esc(titel)}</title></path>`
 }

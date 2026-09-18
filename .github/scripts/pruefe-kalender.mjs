@@ -97,7 +97,7 @@ const lies = text => {
       offen.hoehe = Math.round((p[3].y - p[0].y) * 100) / 100
     else if (art === "o") {
       const hoehe = offen.hoehe ?? 0
-      bloecke.push({stufe: Number(stufe), titel: titel ?? null, x: p[0].x, deckelY: p[1].y, hoehe, bodenY: Math.round((p[1].y + hoehe) * 100) / 100})
+      bloecke.push({stufe: Number(stufe), titel: titel ?? null, x: p[0].x, halb: Math.round((p[1].x - p[0].x) * 100) / 100, deckelY: p[1].y, hoehe, bodenY: Math.round((p[1].y + hoehe) * 100) / 100})
       offen = {}
     }
   }
@@ -243,6 +243,28 @@ pruefe(
       if (seiten !== 2 * erhoben)
         return `${name}: ${erhoben} raised blocks but ${seiten} side faces, expected ${2 * erhoben}`
     }
+    return true
+  },
+)
+
+pruefe(
+  "fuge-zwischen-den-tagen",
+  "two neighbouring days keep a seam between them, so a week without contributions still reads as seven days and not as one slab",
+  "draw the blocks at full pitch: ZA = a, ZB = b",
+  () => {
+    const xWerte = [...new Set(gitter.map(block => block.x))].sort((links, rechts) => links - rechts)
+    if (xWerte.length < 3)
+      return `only ${xWerte.length} distinct block positions: the pitch of the grid cannot be measured`
+    let schritt = Infinity
+    for (let i = 1; i < xWerte.length; i++)
+      schritt = Math.min(schritt, xWerte[i] - xWerte[i - 1])
+    const halb = [...new Set(gitter.map(block => block.halb))]
+    if (halb.length !== 1)
+      return `the lids are drawn at ${halb.length} different widths: ${halb.join(", ")}`
+    if (halb[0] >= schritt)
+      return `lid half width ${halb[0]} at a grid pitch of ${schritt}: neighbouring days touch and merge into one surface`
+    if (halb[0] < 0.85 * schritt)
+      return `lid half width ${halb[0]} at a grid pitch of ${schritt}: the seam eats more than a seventh of the block`
     return true
   },
 )
