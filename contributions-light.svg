@@ -1,216 +1,217 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="421" height="175" viewBox="0 0 421 175" role="img" aria-label="1,289 contributions in the last 6 months">
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="568" viewBox="0 0 880 568" role="img" aria-label="1,294 contributions in the last 6 months">
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
-    .kopf { font-size: 13px; font-weight: 600; fill: #1C2143; }
-    .klein { font-size: 9px; fill: #6B6F80; }
-    .fuss  { font-size: 9px; fill: #8A8E9C; }
-    .s0 { fill: #E9E6E0; } .s1 { fill: #BFC2D2; } .s2 { fill: #8E93AE; } .s3 { fill: #4E5686; } .s4 { fill: #1C2143; }
+    .kopf { font-size: 17px; font-weight: 600; fill: #1C2143; }
+    .klein { font-size: 11px; fill: #6B6F80; }
+    .fuss  { font-size: 11px; fill: #8A8E9C; }
+    .o0 { fill: #E9E6E0; } .r0 { fill: #c4c1bc; } .l0 { fill: #95938f; }
+    .o1 { fill: #BFC2D2; } .r1 { fill: #a0a3b0; } .l1 { fill: #7a7c86; }
+    .o2 { fill: #8E93AE; } .r2 { fill: #777b92; } .l2 { fill: #5b5e6f; }
+    .o3 { fill: #4E5686; } .r3 { fill: #424871; } .l3 { fill: #323756; }
+    .o4 { fill: #1C2143; } .r4 { fill: #181c38; } .l4 { fill: #12152b; }
   </style>
-  <text class="kopf" x="30" y="15">1,289 contributions in the last 6 months</text>
-  <text class="klein" x="30" y="28">Mar</text>
-  <text class="klein" x="72" y="28">Apr</text>
-  <text class="klein" x="128" y="28">May</text>
-  <text class="klein" x="198" y="28">Jun</text>
-  <text class="klein" x="254" y="28">Jul</text>
-  <text class="klein" x="310" y="28">Aug</text>
-  <text class="klein" x="380" y="28">Sep</text>
-  <text class="klein" x="0" y="57">Mon</text>
-  <text class="klein" x="0" y="85">Wed</text>
-  <text class="klein" x="0" y="113">Fri</text>
-    <rect class="s0" x="30" y="34" width="11" height="11" rx="2"><title>No contributions on 15 Mar 2026</title></rect>
-    <rect class="s0" x="30" y="48" width="11" height="11" rx="2"><title>No contributions on 16 Mar 2026</title></rect>
-    <rect class="s0" x="30" y="62" width="11" height="11" rx="2"><title>No contributions on 17 Mar 2026</title></rect>
-    <rect class="s0" x="30" y="76" width="11" height="11" rx="2"><title>No contributions on 18 Mar 2026</title></rect>
-    <rect class="s0" x="30" y="90" width="11" height="11" rx="2"><title>No contributions on 19 Mar 2026</title></rect>
-    <rect class="s0" x="30" y="104" width="11" height="11" rx="2"><title>No contributions on 20 Mar 2026</title></rect>
-    <rect class="s0" x="30" y="118" width="11" height="11" rx="2"><title>No contributions on 21 Mar 2026</title></rect>
-    <rect class="s0" x="44" y="34" width="11" height="11" rx="2"><title>No contributions on 22 Mar 2026</title></rect>
-    <rect class="s0" x="44" y="48" width="11" height="11" rx="2"><title>No contributions on 23 Mar 2026</title></rect>
-    <rect class="s0" x="44" y="62" width="11" height="11" rx="2"><title>No contributions on 24 Mar 2026</title></rect>
-    <rect class="s0" x="44" y="76" width="11" height="11" rx="2"><title>No contributions on 25 Mar 2026</title></rect>
-    <rect class="s0" x="44" y="90" width="11" height="11" rx="2"><title>No contributions on 26 Mar 2026</title></rect>
-    <rect class="s0" x="44" y="104" width="11" height="11" rx="2"><title>No contributions on 27 Mar 2026</title></rect>
-    <rect class="s0" x="44" y="118" width="11" height="11" rx="2"><title>No contributions on 28 Mar 2026</title></rect>
-    <rect class="s0" x="58" y="34" width="11" height="11" rx="2"><title>No contributions on 29 Mar 2026</title></rect>
-    <rect class="s0" x="58" y="48" width="11" height="11" rx="2"><title>No contributions on 30 Mar 2026</title></rect>
-    <rect class="s0" x="58" y="62" width="11" height="11" rx="2"><title>No contributions on 31 Mar 2026</title></rect>
-    <rect class="s0" x="58" y="76" width="11" height="11" rx="2"><title>No contributions on 1 Apr 2026</title></rect>
-    <rect class="s0" x="58" y="90" width="11" height="11" rx="2"><title>No contributions on 2 Apr 2026</title></rect>
-    <rect class="s0" x="58" y="104" width="11" height="11" rx="2"><title>No contributions on 3 Apr 2026</title></rect>
-    <rect class="s0" x="58" y="118" width="11" height="11" rx="2"><title>No contributions on 4 Apr 2026</title></rect>
-    <rect class="s0" x="72" y="34" width="11" height="11" rx="2"><title>No contributions on 5 Apr 2026</title></rect>
-    <rect class="s0" x="72" y="48" width="11" height="11" rx="2"><title>No contributions on 6 Apr 2026</title></rect>
-    <rect class="s0" x="72" y="62" width="11" height="11" rx="2"><title>No contributions on 7 Apr 2026</title></rect>
-    <rect class="s0" x="72" y="76" width="11" height="11" rx="2"><title>No contributions on 8 Apr 2026</title></rect>
-    <rect class="s0" x="72" y="90" width="11" height="11" rx="2"><title>No contributions on 9 Apr 2026</title></rect>
-    <rect class="s0" x="72" y="104" width="11" height="11" rx="2"><title>No contributions on 10 Apr 2026</title></rect>
-    <rect class="s0" x="72" y="118" width="11" height="11" rx="2"><title>No contributions on 11 Apr 2026</title></rect>
-    <rect class="s0" x="86" y="34" width="11" height="11" rx="2"><title>No contributions on 12 Apr 2026</title></rect>
-    <rect class="s0" x="86" y="48" width="11" height="11" rx="2"><title>No contributions on 13 Apr 2026</title></rect>
-    <rect class="s0" x="86" y="62" width="11" height="11" rx="2"><title>No contributions on 14 Apr 2026</title></rect>
-    <rect class="s0" x="86" y="76" width="11" height="11" rx="2"><title>No contributions on 15 Apr 2026</title></rect>
-    <rect class="s0" x="86" y="90" width="11" height="11" rx="2"><title>No contributions on 16 Apr 2026</title></rect>
-    <rect class="s0" x="86" y="104" width="11" height="11" rx="2"><title>No contributions on 17 Apr 2026</title></rect>
-    <rect class="s0" x="86" y="118" width="11" height="11" rx="2"><title>No contributions on 18 Apr 2026</title></rect>
-    <rect class="s0" x="100" y="34" width="11" height="11" rx="2"><title>No contributions on 19 Apr 2026</title></rect>
-    <rect class="s0" x="100" y="48" width="11" height="11" rx="2"><title>No contributions on 20 Apr 2026</title></rect>
-    <rect class="s0" x="100" y="62" width="11" height="11" rx="2"><title>No contributions on 21 Apr 2026</title></rect>
-    <rect class="s0" x="100" y="76" width="11" height="11" rx="2"><title>No contributions on 22 Apr 2026</title></rect>
-    <rect class="s0" x="100" y="90" width="11" height="11" rx="2"><title>No contributions on 23 Apr 2026</title></rect>
-    <rect class="s0" x="100" y="104" width="11" height="11" rx="2"><title>No contributions on 24 Apr 2026</title></rect>
-    <rect class="s0" x="100" y="118" width="11" height="11" rx="2"><title>No contributions on 25 Apr 2026</title></rect>
-    <rect class="s0" x="114" y="34" width="11" height="11" rx="2"><title>No contributions on 26 Apr 2026</title></rect>
-    <rect class="s0" x="114" y="48" width="11" height="11" rx="2"><title>No contributions on 27 Apr 2026</title></rect>
-    <rect class="s0" x="114" y="62" width="11" height="11" rx="2"><title>No contributions on 28 Apr 2026</title></rect>
-    <rect class="s0" x="114" y="76" width="11" height="11" rx="2"><title>No contributions on 29 Apr 2026</title></rect>
-    <rect class="s0" x="114" y="90" width="11" height="11" rx="2"><title>No contributions on 30 Apr 2026</title></rect>
-    <rect class="s0" x="114" y="104" width="11" height="11" rx="2"><title>No contributions on 1 May 2026</title></rect>
-    <rect class="s0" x="114" y="118" width="11" height="11" rx="2"><title>No contributions on 2 May 2026</title></rect>
-    <rect class="s0" x="128" y="34" width="11" height="11" rx="2"><title>No contributions on 3 May 2026</title></rect>
-    <rect class="s0" x="128" y="48" width="11" height="11" rx="2"><title>No contributions on 4 May 2026</title></rect>
-    <rect class="s0" x="128" y="62" width="11" height="11" rx="2"><title>No contributions on 5 May 2026</title></rect>
-    <rect class="s0" x="128" y="76" width="11" height="11" rx="2"><title>No contributions on 6 May 2026</title></rect>
-    <rect class="s0" x="128" y="90" width="11" height="11" rx="2"><title>No contributions on 7 May 2026</title></rect>
-    <rect class="s0" x="128" y="104" width="11" height="11" rx="2"><title>No contributions on 8 May 2026</title></rect>
-    <rect class="s0" x="128" y="118" width="11" height="11" rx="2"><title>No contributions on 9 May 2026</title></rect>
-    <rect class="s0" x="142" y="34" width="11" height="11" rx="2"><title>No contributions on 10 May 2026</title></rect>
-    <rect class="s0" x="142" y="48" width="11" height="11" rx="2"><title>No contributions on 11 May 2026</title></rect>
-    <rect class="s0" x="142" y="62" width="11" height="11" rx="2"><title>No contributions on 12 May 2026</title></rect>
-    <rect class="s0" x="142" y="76" width="11" height="11" rx="2"><title>No contributions on 13 May 2026</title></rect>
-    <rect class="s0" x="142" y="90" width="11" height="11" rx="2"><title>No contributions on 14 May 2026</title></rect>
-    <rect class="s0" x="142" y="104" width="11" height="11" rx="2"><title>No contributions on 15 May 2026</title></rect>
-    <rect class="s0" x="142" y="118" width="11" height="11" rx="2"><title>No contributions on 16 May 2026</title></rect>
-    <rect class="s0" x="156" y="34" width="11" height="11" rx="2"><title>No contributions on 17 May 2026</title></rect>
-    <rect class="s0" x="156" y="48" width="11" height="11" rx="2"><title>No contributions on 18 May 2026</title></rect>
-    <rect class="s0" x="156" y="62" width="11" height="11" rx="2"><title>No contributions on 19 May 2026</title></rect>
-    <rect class="s0" x="156" y="76" width="11" height="11" rx="2"><title>No contributions on 20 May 2026</title></rect>
-    <rect class="s0" x="156" y="90" width="11" height="11" rx="2"><title>No contributions on 21 May 2026</title></rect>
-    <rect class="s0" x="156" y="104" width="11" height="11" rx="2"><title>No contributions on 22 May 2026</title></rect>
-    <rect class="s0" x="156" y="118" width="11" height="11" rx="2"><title>No contributions on 23 May 2026</title></rect>
-    <rect class="s0" x="170" y="34" width="11" height="11" rx="2"><title>No contributions on 24 May 2026</title></rect>
-    <rect class="s0" x="170" y="48" width="11" height="11" rx="2"><title>No contributions on 25 May 2026</title></rect>
-    <rect class="s0" x="170" y="62" width="11" height="11" rx="2"><title>No contributions on 26 May 2026</title></rect>
-    <rect class="s0" x="170" y="76" width="11" height="11" rx="2"><title>No contributions on 27 May 2026</title></rect>
-    <rect class="s0" x="170" y="90" width="11" height="11" rx="2"><title>No contributions on 28 May 2026</title></rect>
-    <rect class="s0" x="170" y="104" width="11" height="11" rx="2"><title>No contributions on 29 May 2026</title></rect>
-    <rect class="s0" x="170" y="118" width="11" height="11" rx="2"><title>No contributions on 30 May 2026</title></rect>
-    <rect class="s0" x="184" y="34" width="11" height="11" rx="2"><title>No contributions on 31 May 2026</title></rect>
-    <rect class="s0" x="184" y="48" width="11" height="11" rx="2"><title>No contributions on 1 Jun 2026</title></rect>
-    <rect class="s0" x="184" y="62" width="11" height="11" rx="2"><title>No contributions on 2 Jun 2026</title></rect>
-    <rect class="s0" x="184" y="76" width="11" height="11" rx="2"><title>No contributions on 3 Jun 2026</title></rect>
-    <rect class="s0" x="184" y="90" width="11" height="11" rx="2"><title>No contributions on 4 Jun 2026</title></rect>
-    <rect class="s0" x="184" y="104" width="11" height="11" rx="2"><title>No contributions on 5 Jun 2026</title></rect>
-    <rect class="s0" x="184" y="118" width="11" height="11" rx="2"><title>No contributions on 6 Jun 2026</title></rect>
-    <rect class="s0" x="198" y="34" width="11" height="11" rx="2"><title>No contributions on 7 Jun 2026</title></rect>
-    <rect class="s0" x="198" y="48" width="11" height="11" rx="2"><title>No contributions on 8 Jun 2026</title></rect>
-    <rect class="s0" x="198" y="62" width="11" height="11" rx="2"><title>No contributions on 9 Jun 2026</title></rect>
-    <rect class="s0" x="198" y="76" width="11" height="11" rx="2"><title>No contributions on 10 Jun 2026</title></rect>
-    <rect class="s0" x="198" y="90" width="11" height="11" rx="2"><title>No contributions on 11 Jun 2026</title></rect>
-    <rect class="s0" x="198" y="104" width="11" height="11" rx="2"><title>No contributions on 12 Jun 2026</title></rect>
-    <rect class="s0" x="198" y="118" width="11" height="11" rx="2"><title>No contributions on 13 Jun 2026</title></rect>
-    <rect class="s0" x="212" y="34" width="11" height="11" rx="2"><title>No contributions on 14 Jun 2026</title></rect>
-    <rect class="s0" x="212" y="48" width="11" height="11" rx="2"><title>No contributions on 15 Jun 2026</title></rect>
-    <rect class="s0" x="212" y="62" width="11" height="11" rx="2"><title>No contributions on 16 Jun 2026</title></rect>
-    <rect class="s0" x="212" y="76" width="11" height="11" rx="2"><title>No contributions on 17 Jun 2026</title></rect>
-    <rect class="s0" x="212" y="90" width="11" height="11" rx="2"><title>No contributions on 18 Jun 2026</title></rect>
-    <rect class="s0" x="212" y="104" width="11" height="11" rx="2"><title>No contributions on 19 Jun 2026</title></rect>
-    <rect class="s0" x="212" y="118" width="11" height="11" rx="2"><title>No contributions on 20 Jun 2026</title></rect>
-    <rect class="s0" x="226" y="34" width="11" height="11" rx="2"><title>No contributions on 21 Jun 2026</title></rect>
-    <rect class="s0" x="226" y="48" width="11" height="11" rx="2"><title>No contributions on 22 Jun 2026</title></rect>
-    <rect class="s0" x="226" y="62" width="11" height="11" rx="2"><title>No contributions on 23 Jun 2026</title></rect>
-    <rect class="s0" x="226" y="76" width="11" height="11" rx="2"><title>No contributions on 24 Jun 2026</title></rect>
-    <rect class="s0" x="226" y="90" width="11" height="11" rx="2"><title>No contributions on 25 Jun 2026</title></rect>
-    <rect class="s0" x="226" y="104" width="11" height="11" rx="2"><title>No contributions on 26 Jun 2026</title></rect>
-    <rect class="s0" x="226" y="118" width="11" height="11" rx="2"><title>No contributions on 27 Jun 2026</title></rect>
-    <rect class="s0" x="240" y="34" width="11" height="11" rx="2"><title>No contributions on 28 Jun 2026</title></rect>
-    <rect class="s0" x="240" y="48" width="11" height="11" rx="2"><title>No contributions on 29 Jun 2026</title></rect>
-    <rect class="s0" x="240" y="62" width="11" height="11" rx="2"><title>No contributions on 30 Jun 2026</title></rect>
-    <rect class="s0" x="240" y="76" width="11" height="11" rx="2"><title>No contributions on 1 Jul 2026</title></rect>
-    <rect class="s0" x="240" y="90" width="11" height="11" rx="2"><title>No contributions on 2 Jul 2026</title></rect>
-    <rect class="s0" x="240" y="104" width="11" height="11" rx="2"><title>No contributions on 3 Jul 2026</title></rect>
-    <rect class="s0" x="240" y="118" width="11" height="11" rx="2"><title>No contributions on 4 Jul 2026</title></rect>
-    <rect class="s0" x="254" y="34" width="11" height="11" rx="2"><title>No contributions on 5 Jul 2026</title></rect>
-    <rect class="s0" x="254" y="48" width="11" height="11" rx="2"><title>No contributions on 6 Jul 2026</title></rect>
-    <rect class="s0" x="254" y="62" width="11" height="11" rx="2"><title>No contributions on 7 Jul 2026</title></rect>
-    <rect class="s0" x="254" y="76" width="11" height="11" rx="2"><title>No contributions on 8 Jul 2026</title></rect>
-    <rect class="s0" x="254" y="90" width="11" height="11" rx="2"><title>No contributions on 9 Jul 2026</title></rect>
-    <rect class="s0" x="254" y="104" width="11" height="11" rx="2"><title>No contributions on 10 Jul 2026</title></rect>
-    <rect class="s0" x="254" y="118" width="11" height="11" rx="2"><title>No contributions on 11 Jul 2026</title></rect>
-    <rect class="s0" x="268" y="34" width="11" height="11" rx="2"><title>No contributions on 12 Jul 2026</title></rect>
-    <rect class="s0" x="268" y="48" width="11" height="11" rx="2"><title>No contributions on 13 Jul 2026</title></rect>
-    <rect class="s0" x="268" y="62" width="11" height="11" rx="2"><title>No contributions on 14 Jul 2026</title></rect>
-    <rect class="s0" x="268" y="76" width="11" height="11" rx="2"><title>No contributions on 15 Jul 2026</title></rect>
-    <rect class="s0" x="268" y="90" width="11" height="11" rx="2"><title>No contributions on 16 Jul 2026</title></rect>
-    <rect class="s0" x="268" y="104" width="11" height="11" rx="2"><title>No contributions on 17 Jul 2026</title></rect>
-    <rect class="s0" x="268" y="118" width="11" height="11" rx="2"><title>No contributions on 18 Jul 2026</title></rect>
-    <rect class="s0" x="282" y="34" width="11" height="11" rx="2"><title>No contributions on 19 Jul 2026</title></rect>
-    <rect class="s0" x="282" y="48" width="11" height="11" rx="2"><title>No contributions on 20 Jul 2026</title></rect>
-    <rect class="s0" x="282" y="62" width="11" height="11" rx="2"><title>No contributions on 21 Jul 2026</title></rect>
-    <rect class="s0" x="282" y="76" width="11" height="11" rx="2"><title>No contributions on 22 Jul 2026</title></rect>
-    <rect class="s0" x="282" y="90" width="11" height="11" rx="2"><title>No contributions on 23 Jul 2026</title></rect>
-    <rect class="s0" x="282" y="104" width="11" height="11" rx="2"><title>No contributions on 24 Jul 2026</title></rect>
-    <rect class="s0" x="282" y="118" width="11" height="11" rx="2"><title>No contributions on 25 Jul 2026</title></rect>
-    <rect class="s0" x="296" y="34" width="11" height="11" rx="2"><title>No contributions on 26 Jul 2026</title></rect>
-    <rect class="s0" x="296" y="48" width="11" height="11" rx="2"><title>No contributions on 27 Jul 2026</title></rect>
-    <rect class="s0" x="296" y="62" width="11" height="11" rx="2"><title>No contributions on 28 Jul 2026</title></rect>
-    <rect class="s0" x="296" y="76" width="11" height="11" rx="2"><title>No contributions on 29 Jul 2026</title></rect>
-    <rect class="s0" x="296" y="90" width="11" height="11" rx="2"><title>No contributions on 30 Jul 2026</title></rect>
-    <rect class="s0" x="296" y="104" width="11" height="11" rx="2"><title>No contributions on 31 Jul 2026</title></rect>
-    <rect class="s0" x="296" y="118" width="11" height="11" rx="2"><title>No contributions on 1 Aug 2026</title></rect>
-    <rect class="s0" x="310" y="34" width="11" height="11" rx="2"><title>No contributions on 2 Aug 2026</title></rect>
-    <rect class="s0" x="310" y="48" width="11" height="11" rx="2"><title>No contributions on 3 Aug 2026</title></rect>
-    <rect class="s0" x="310" y="62" width="11" height="11" rx="2"><title>No contributions on 4 Aug 2026</title></rect>
-    <rect class="s0" x="310" y="76" width="11" height="11" rx="2"><title>No contributions on 5 Aug 2026</title></rect>
-    <rect class="s0" x="310" y="90" width="11" height="11" rx="2"><title>No contributions on 6 Aug 2026</title></rect>
-    <rect class="s0" x="310" y="104" width="11" height="11" rx="2"><title>No contributions on 7 Aug 2026</title></rect>
-    <rect class="s0" x="310" y="118" width="11" height="11" rx="2"><title>No contributions on 8 Aug 2026</title></rect>
-    <rect class="s0" x="324" y="34" width="11" height="11" rx="2"><title>No contributions on 9 Aug 2026</title></rect>
-    <rect class="s0" x="324" y="48" width="11" height="11" rx="2"><title>No contributions on 10 Aug 2026</title></rect>
-    <rect class="s0" x="324" y="62" width="11" height="11" rx="2"><title>No contributions on 11 Aug 2026</title></rect>
-    <rect class="s0" x="324" y="76" width="11" height="11" rx="2"><title>No contributions on 12 Aug 2026</title></rect>
-    <rect class="s0" x="324" y="90" width="11" height="11" rx="2"><title>No contributions on 13 Aug 2026</title></rect>
-    <rect class="s1" x="324" y="104" width="11" height="11" rx="2"><title>1 contribution on 14 Aug 2026</title></rect>
-    <rect class="s0" x="324" y="118" width="11" height="11" rx="2"><title>No contributions on 15 Aug 2026</title></rect>
-    <rect class="s0" x="338" y="34" width="11" height="11" rx="2"><title>No contributions on 16 Aug 2026</title></rect>
-    <rect class="s0" x="338" y="48" width="11" height="11" rx="2"><title>No contributions on 17 Aug 2026</title></rect>
-    <rect class="s0" x="338" y="62" width="11" height="11" rx="2"><title>No contributions on 18 Aug 2026</title></rect>
-    <rect class="s0" x="338" y="76" width="11" height="11" rx="2"><title>No contributions on 19 Aug 2026</title></rect>
-    <rect class="s2" x="338" y="90" width="11" height="11" rx="2"><title>95 contributions on 20 Aug 2026</title></rect>
-    <rect class="s2" x="338" y="104" width="11" height="11" rx="2"><title>60 contributions on 21 Aug 2026</title></rect>
-    <rect class="s0" x="338" y="118" width="11" height="11" rx="2"><title>No contributions on 22 Aug 2026</title></rect>
-    <rect class="s0" x="352" y="34" width="11" height="11" rx="2"><title>No contributions on 23 Aug 2026</title></rect>
-    <rect class="s0" x="352" y="48" width="11" height="11" rx="2"><title>No contributions on 24 Aug 2026</title></rect>
-    <rect class="s1" x="352" y="62" width="11" height="11" rx="2"><title>2 contributions on 25 Aug 2026</title></rect>
-    <rect class="s4" x="352" y="76" width="11" height="11" rx="2"><title>184 contributions on 26 Aug 2026</title></rect>
-    <rect class="s3" x="352" y="90" width="11" height="11" rx="2"><title>138 contributions on 27 Aug 2026</title></rect>
-    <rect class="s1" x="352" y="104" width="11" height="11" rx="2"><title>24 contributions on 28 Aug 2026</title></rect>
-    <rect class="s0" x="352" y="118" width="11" height="11" rx="2"><title>No contributions on 29 Aug 2026</title></rect>
-    <rect class="s0" x="366" y="34" width="11" height="11" rx="2"><title>No contributions on 30 Aug 2026</title></rect>
-    <rect class="s0" x="366" y="48" width="11" height="11" rx="2"><title>No contributions on 31 Aug 2026</title></rect>
-    <rect class="s0" x="366" y="62" width="11" height="11" rx="2"><title>No contributions on 1 Sep 2026</title></rect>
-    <rect class="s3" x="366" y="76" width="11" height="11" rx="2"><title>122 contributions on 2 Sep 2026</title></rect>
-    <rect class="s2" x="366" y="90" width="11" height="11" rx="2"><title>70 contributions on 3 Sep 2026</title></rect>
-    <rect class="s2" x="366" y="104" width="11" height="11" rx="2"><title>58 contributions on 4 Sep 2026</title></rect>
-    <rect class="s0" x="366" y="118" width="11" height="11" rx="2"><title>No contributions on 5 Sep 2026</title></rect>
-    <rect class="s0" x="380" y="34" width="11" height="11" rx="2"><title>No contributions on 6 Sep 2026</title></rect>
-    <rect class="s0" x="380" y="48" width="11" height="11" rx="2"><title>No contributions on 7 Sep 2026</title></rect>
-    <rect class="s0" x="380" y="62" width="11" height="11" rx="2"><title>No contributions on 8 Sep 2026</title></rect>
-    <rect class="s3" x="380" y="76" width="11" height="11" rx="2"><title>107 contributions on 9 Sep 2026</title></rect>
-    <rect class="s2" x="380" y="90" width="11" height="11" rx="2"><title>102 contributions on 10 Sep 2026</title></rect>
-    <rect class="s1" x="380" y="104" width="11" height="11" rx="2"><title>43 contributions on 11 Sep 2026</title></rect>
-    <rect class="s0" x="380" y="118" width="11" height="11" rx="2"><title>No contributions on 12 Sep 2026</title></rect>
-    <rect class="s0" x="394" y="34" width="11" height="11" rx="2"><title>No contributions on 13 Sep 2026</title></rect>
-    <rect class="s0" x="394" y="48" width="11" height="11" rx="2"><title>No contributions on 14 Sep 2026</title></rect>
-    <rect class="s0" x="394" y="62" width="11" height="11" rx="2"><title>No contributions on 15 Sep 2026</title></rect>
-    <rect class="s1" x="394" y="76" width="11" height="11" rx="2"><title>35 contributions on 16 Sep 2026</title></rect>
-    <rect class="s1" x="394" y="90" width="11" height="11" rx="2"><title>39 contributions on 17 Sep 2026</title></rect>
-    <rect class="s4" x="394" y="104" width="11" height="11" rx="2"><title>209 contributions on 18 Sep 2026</title></rect>
-  <text class="klein" x="278" y="154">Less</text>
-    <rect class="s0" x="307" y="145" width="11" height="11" rx="2"/>
-    <rect class="s1" x="321" y="145" width="11" height="11" rx="2"/>
-    <rect class="s2" x="335" y="145" width="11" height="11" rx="2"/>
-    <rect class="s3" x="349" y="145" width="11" height="11" rx="2"/>
-    <rect class="s4" x="363" y="145" width="11" height="11" rx="2"/>
-  <text class="klein" x="379" y="154">More</text>
-  <text class="fuss" x="30" y="167">15 Mar 2026 – 18 Sep 2026  ·  16 active days  ·  longest streak 4  ·  current streak 3</text>
+  <text class="kopf" x="52" y="26">1,294 contributions in the last 6 months</text>
+    <path class="o0" d="M213,103.4 236,114.9 213,126.4 190,114.9Z"><title>No contributions on 15 Mar 2026</title></path>
+    <path class="o0" d="M190,114.9 213,126.4 190,137.9 167,126.4Z"><title>No contributions on 16 Mar 2026</title></path>
+    <path class="o0" d="M236,114.9 259,126.4 236,137.9 213,126.4Z"><title>No contributions on 22 Mar 2026</title></path>
+    <path class="o0" d="M167,126.4 190,137.9 167,149.4 144,137.9Z"><title>No contributions on 17 Mar 2026</title></path>
+    <path class="o0" d="M213,126.4 236,137.9 213,149.4 190,137.9Z"><title>No contributions on 23 Mar 2026</title></path>
+    <path class="o0" d="M259,126.4 282,137.9 259,149.4 236,137.9Z"><title>No contributions on 29 Mar 2026</title></path>
+    <path class="o0" d="M144,137.9 167,149.4 144,160.9 121,149.4Z"><title>No contributions on 18 Mar 2026</title></path>
+    <path class="o0" d="M190,137.9 213,149.4 190,160.9 167,149.4Z"><title>No contributions on 24 Mar 2026</title></path>
+    <path class="o0" d="M236,137.9 259,149.4 236,160.9 213,149.4Z"><title>No contributions on 30 Mar 2026</title></path>
+    <path class="o0" d="M282,137.9 305,149.4 282,160.9 259,149.4Z"><title>No contributions on 5 Apr 2026</title></path>
+    <path class="o0" d="M121,149.4 144,160.9 121,172.4 98,160.9Z"><title>No contributions on 19 Mar 2026</title></path>
+    <path class="o0" d="M167,149.4 190,160.9 167,172.4 144,160.9Z"><title>No contributions on 25 Mar 2026</title></path>
+    <path class="o0" d="M213,149.4 236,160.9 213,172.4 190,160.9Z"><title>No contributions on 31 Mar 2026</title></path>
+    <path class="o0" d="M259,149.4 282,160.9 259,172.4 236,160.9Z"><title>No contributions on 6 Apr 2026</title></path>
+    <path class="o0" d="M305,149.4 328,160.9 305,172.4 282,160.9Z"><title>No contributions on 12 Apr 2026</title></path>
+    <path class="o0" d="M98,160.9 121,172.4 98,183.9 75,172.4Z"><title>No contributions on 20 Mar 2026</title></path>
+    <path class="o0" d="M144,160.9 167,172.4 144,183.9 121,172.4Z"><title>No contributions on 26 Mar 2026</title></path>
+    <path class="o0" d="M190,160.9 213,172.4 190,183.9 167,172.4Z"><title>No contributions on 1 Apr 2026</title></path>
+    <path class="o0" d="M236,160.9 259,172.4 236,183.9 213,172.4Z"><title>No contributions on 7 Apr 2026</title></path>
+    <path class="o0" d="M282,160.9 305,172.4 282,183.9 259,172.4Z"><title>No contributions on 13 Apr 2026</title></path>
+    <path class="o0" d="M328,160.9 351,172.4 328,183.9 305,172.4Z"><title>No contributions on 19 Apr 2026</title></path>
+    <path class="o0" d="M75,172.4 98,183.9 75,195.4 52,183.9Z"><title>No contributions on 21 Mar 2026</title></path>
+    <path class="o0" d="M121,172.4 144,183.9 121,195.4 98,183.9Z"><title>No contributions on 27 Mar 2026</title></path>
+    <path class="o0" d="M167,172.4 190,183.9 167,195.4 144,183.9Z"><title>No contributions on 2 Apr 2026</title></path>
+    <path class="o0" d="M213,172.4 236,183.9 213,195.4 190,183.9Z"><title>No contributions on 8 Apr 2026</title></path>
+    <path class="o0" d="M259,172.4 282,183.9 259,195.4 236,183.9Z"><title>No contributions on 14 Apr 2026</title></path>
+    <path class="o0" d="M305,172.4 328,183.9 305,195.4 282,183.9Z"><title>No contributions on 20 Apr 2026</title></path>
+    <path class="o0" d="M351,172.4 374,183.9 351,195.4 328,183.9Z"><title>No contributions on 26 Apr 2026</title></path>
+    <path class="o0" d="M98,183.9 121,195.4 98,206.9 75,195.4Z"><title>No contributions on 28 Mar 2026</title></path>
+    <path class="o0" d="M144,183.9 167,195.4 144,206.9 121,195.4Z"><title>No contributions on 3 Apr 2026</title></path>
+    <path class="o0" d="M190,183.9 213,195.4 190,206.9 167,195.4Z"><title>No contributions on 9 Apr 2026</title></path>
+    <path class="o0" d="M236,183.9 259,195.4 236,206.9 213,195.4Z"><title>No contributions on 15 Apr 2026</title></path>
+    <path class="o0" d="M282,183.9 305,195.4 282,206.9 259,195.4Z"><title>No contributions on 21 Apr 2026</title></path>
+    <path class="o0" d="M328,183.9 351,195.4 328,206.9 305,195.4Z"><title>No contributions on 27 Apr 2026</title></path>
+    <path class="o0" d="M374,183.9 397,195.4 374,206.9 351,195.4Z"><title>No contributions on 3 May 2026</title></path>
+    <path class="o0" d="M121,195.4 144,206.9 121,218.4 98,206.9Z"><title>No contributions on 4 Apr 2026</title></path>
+    <path class="o0" d="M167,195.4 190,206.9 167,218.4 144,206.9Z"><title>No contributions on 10 Apr 2026</title></path>
+    <path class="o0" d="M213,195.4 236,206.9 213,218.4 190,206.9Z"><title>No contributions on 16 Apr 2026</title></path>
+    <path class="o0" d="M259,195.4 282,206.9 259,218.4 236,206.9Z"><title>No contributions on 22 Apr 2026</title></path>
+    <path class="o0" d="M305,195.4 328,206.9 305,218.4 282,206.9Z"><title>No contributions on 28 Apr 2026</title></path>
+    <path class="o0" d="M351,195.4 374,206.9 351,218.4 328,206.9Z"><title>No contributions on 4 May 2026</title></path>
+    <path class="o0" d="M397,195.4 420,206.9 397,218.4 374,206.9Z"><title>No contributions on 10 May 2026</title></path>
+    <path class="o0" d="M144,206.9 167,218.4 144,229.9 121,218.4Z"><title>No contributions on 11 Apr 2026</title></path>
+    <path class="o0" d="M190,206.9 213,218.4 190,229.9 167,218.4Z"><title>No contributions on 17 Apr 2026</title></path>
+    <path class="o0" d="M236,206.9 259,218.4 236,229.9 213,218.4Z"><title>No contributions on 23 Apr 2026</title></path>
+    <path class="o0" d="M282,206.9 305,218.4 282,229.9 259,218.4Z"><title>No contributions on 29 Apr 2026</title></path>
+    <path class="o0" d="M328,206.9 351,218.4 328,229.9 305,218.4Z"><title>No contributions on 5 May 2026</title></path>
+    <path class="o0" d="M374,206.9 397,218.4 374,229.9 351,218.4Z"><title>No contributions on 11 May 2026</title></path>
+    <path class="o0" d="M420,206.9 443,218.4 420,229.9 397,218.4Z"><title>No contributions on 17 May 2026</title></path>
+    <path class="o0" d="M167,218.4 190,229.9 167,241.4 144,229.9Z"><title>No contributions on 18 Apr 2026</title></path>
+    <path class="o0" d="M213,218.4 236,229.9 213,241.4 190,229.9Z"><title>No contributions on 24 Apr 2026</title></path>
+    <path class="o0" d="M259,218.4 282,229.9 259,241.4 236,229.9Z"><title>No contributions on 30 Apr 2026</title></path>
+    <path class="o0" d="M305,218.4 328,229.9 305,241.4 282,229.9Z"><title>No contributions on 6 May 2026</title></path>
+    <path class="o0" d="M351,218.4 374,229.9 351,241.4 328,229.9Z"><title>No contributions on 12 May 2026</title></path>
+    <path class="o0" d="M397,218.4 420,229.9 397,241.4 374,229.9Z"><title>No contributions on 18 May 2026</title></path>
+    <path class="o0" d="M443,218.4 466,229.9 443,241.4 420,229.9Z"><title>No contributions on 24 May 2026</title></path>
+    <path class="o0" d="M190,229.9 213,241.4 190,252.9 167,241.4Z"><title>No contributions on 25 Apr 2026</title></path>
+    <path class="o0" d="M236,229.9 259,241.4 236,252.9 213,241.4Z"><title>No contributions on 1 May 2026</title></path>
+    <path class="o0" d="M282,229.9 305,241.4 282,252.9 259,241.4Z"><title>No contributions on 7 May 2026</title></path>
+    <path class="o0" d="M328,229.9 351,241.4 328,252.9 305,241.4Z"><title>No contributions on 13 May 2026</title></path>
+    <path class="o0" d="M374,229.9 397,241.4 374,252.9 351,241.4Z"><title>No contributions on 19 May 2026</title></path>
+    <path class="o0" d="M420,229.9 443,241.4 420,252.9 397,241.4Z"><title>No contributions on 25 May 2026</title></path>
+    <path class="o0" d="M466,229.9 489,241.4 466,252.9 443,241.4Z"><title>No contributions on 31 May 2026</title></path>
+    <path class="o0" d="M213,241.4 236,252.9 213,264.4 190,252.9Z"><title>No contributions on 2 May 2026</title></path>
+    <path class="o0" d="M259,241.4 282,252.9 259,264.4 236,252.9Z"><title>No contributions on 8 May 2026</title></path>
+    <path class="o0" d="M305,241.4 328,252.9 305,264.4 282,252.9Z"><title>No contributions on 14 May 2026</title></path>
+    <path class="o0" d="M351,241.4 374,252.9 351,264.4 328,252.9Z"><title>No contributions on 20 May 2026</title></path>
+    <path class="o0" d="M397,241.4 420,252.9 397,264.4 374,252.9Z"><title>No contributions on 26 May 2026</title></path>
+    <path class="o0" d="M443,241.4 466,252.9 443,264.4 420,252.9Z"><title>No contributions on 1 Jun 2026</title></path>
+    <path class="o0" d="M489,241.4 512,252.9 489,264.4 466,252.9Z"><title>No contributions on 7 Jun 2026</title></path>
+    <path class="o0" d="M236,252.9 259,264.4 236,275.9 213,264.4Z"><title>No contributions on 9 May 2026</title></path>
+    <path class="o0" d="M282,252.9 305,264.4 282,275.9 259,264.4Z"><title>No contributions on 15 May 2026</title></path>
+    <path class="o0" d="M328,252.9 351,264.4 328,275.9 305,264.4Z"><title>No contributions on 21 May 2026</title></path>
+    <path class="o0" d="M374,252.9 397,264.4 374,275.9 351,264.4Z"><title>No contributions on 27 May 2026</title></path>
+    <path class="o0" d="M420,252.9 443,264.4 420,275.9 397,264.4Z"><title>No contributions on 2 Jun 2026</title></path>
+    <path class="o0" d="M466,252.9 489,264.4 466,275.9 443,264.4Z"><title>No contributions on 8 Jun 2026</title></path>
+    <path class="o0" d="M512,252.9 535,264.4 512,275.9 489,264.4Z"><title>No contributions on 14 Jun 2026</title></path>
+    <path class="o0" d="M259,264.4 282,275.9 259,287.4 236,275.9Z"><title>No contributions on 16 May 2026</title></path>
+    <path class="o0" d="M305,264.4 328,275.9 305,287.4 282,275.9Z"><title>No contributions on 22 May 2026</title></path>
+    <path class="o0" d="M351,264.4 374,275.9 351,287.4 328,275.9Z"><title>No contributions on 28 May 2026</title></path>
+    <path class="o0" d="M397,264.4 420,275.9 397,287.4 374,275.9Z"><title>No contributions on 3 Jun 2026</title></path>
+    <path class="o0" d="M443,264.4 466,275.9 443,287.4 420,275.9Z"><title>No contributions on 9 Jun 2026</title></path>
+    <path class="o0" d="M489,264.4 512,275.9 489,287.4 466,275.9Z"><title>No contributions on 15 Jun 2026</title></path>
+    <path class="o0" d="M535,264.4 558,275.9 535,287.4 512,275.9Z"><title>No contributions on 21 Jun 2026</title></path>
+    <path class="o0" d="M282,275.9 305,287.4 282,298.9 259,287.4Z"><title>No contributions on 23 May 2026</title></path>
+    <path class="o0" d="M328,275.9 351,287.4 328,298.9 305,287.4Z"><title>No contributions on 29 May 2026</title></path>
+    <path class="o0" d="M374,275.9 397,287.4 374,298.9 351,287.4Z"><title>No contributions on 4 Jun 2026</title></path>
+    <path class="o0" d="M420,275.9 443,287.4 420,298.9 397,287.4Z"><title>No contributions on 10 Jun 2026</title></path>
+    <path class="o0" d="M466,275.9 489,287.4 466,298.9 443,287.4Z"><title>No contributions on 16 Jun 2026</title></path>
+    <path class="o0" d="M512,275.9 535,287.4 512,298.9 489,287.4Z"><title>No contributions on 22 Jun 2026</title></path>
+    <path class="o0" d="M558,275.9 581,287.4 558,298.9 535,287.4Z"><title>No contributions on 28 Jun 2026</title></path>
+    <path class="o0" d="M305,287.4 328,298.9 305,310.4 282,298.9Z"><title>No contributions on 30 May 2026</title></path>
+    <path class="o0" d="M351,287.4 374,298.9 351,310.4 328,298.9Z"><title>No contributions on 5 Jun 2026</title></path>
+    <path class="o0" d="M397,287.4 420,298.9 397,310.4 374,298.9Z"><title>No contributions on 11 Jun 2026</title></path>
+    <path class="o0" d="M443,287.4 466,298.9 443,310.4 420,298.9Z"><title>No contributions on 17 Jun 2026</title></path>
+    <path class="o0" d="M489,287.4 512,298.9 489,310.4 466,298.9Z"><title>No contributions on 23 Jun 2026</title></path>
+    <path class="o0" d="M535,287.4 558,298.9 535,310.4 512,298.9Z"><title>No contributions on 29 Jun 2026</title></path>
+    <path class="o0" d="M581,287.4 604,298.9 581,310.4 558,298.9Z"><title>No contributions on 5 Jul 2026</title></path>
+    <path class="o0" d="M328,298.9 351,310.4 328,321.9 305,310.4Z"><title>No contributions on 6 Jun 2026</title></path>
+    <path class="o0" d="M374,298.9 397,310.4 374,321.9 351,310.4Z"><title>No contributions on 12 Jun 2026</title></path>
+    <path class="o0" d="M420,298.9 443,310.4 420,321.9 397,310.4Z"><title>No contributions on 18 Jun 2026</title></path>
+    <path class="o0" d="M466,298.9 489,310.4 466,321.9 443,310.4Z"><title>No contributions on 24 Jun 2026</title></path>
+    <path class="o0" d="M512,298.9 535,310.4 512,321.9 489,310.4Z"><title>No contributions on 30 Jun 2026</title></path>
+    <path class="o0" d="M558,298.9 581,310.4 558,321.9 535,310.4Z"><title>No contributions on 6 Jul 2026</title></path>
+    <path class="o0" d="M604,298.9 627,310.4 604,321.9 581,310.4Z"><title>No contributions on 12 Jul 2026</title></path>
+    <path class="o0" d="M351,310.4 374,321.9 351,333.4 328,321.9Z"><title>No contributions on 13 Jun 2026</title></path>
+    <path class="o0" d="M397,310.4 420,321.9 397,333.4 374,321.9Z"><title>No contributions on 19 Jun 2026</title></path>
+    <path class="o0" d="M443,310.4 466,321.9 443,333.4 420,321.9Z"><title>No contributions on 25 Jun 2026</title></path>
+    <path class="o0" d="M489,310.4 512,321.9 489,333.4 466,321.9Z"><title>No contributions on 1 Jul 2026</title></path>
+    <path class="o0" d="M535,310.4 558,321.9 535,333.4 512,321.9Z"><title>No contributions on 7 Jul 2026</title></path>
+    <path class="o0" d="M581,310.4 604,321.9 581,333.4 558,321.9Z"><title>No contributions on 13 Jul 2026</title></path>
+    <path class="o0" d="M627,310.4 650,321.9 627,333.4 604,321.9Z"><title>No contributions on 19 Jul 2026</title></path>
+    <path class="o0" d="M374,321.9 397,333.4 374,344.9 351,333.4Z"><title>No contributions on 20 Jun 2026</title></path>
+    <path class="o0" d="M420,321.9 443,333.4 420,344.9 397,333.4Z"><title>No contributions on 26 Jun 2026</title></path>
+    <path class="o0" d="M466,321.9 489,333.4 466,344.9 443,333.4Z"><title>No contributions on 2 Jul 2026</title></path>
+    <path class="o0" d="M512,321.9 535,333.4 512,344.9 489,333.4Z"><title>No contributions on 8 Jul 2026</title></path>
+    <path class="o0" d="M558,321.9 581,333.4 558,344.9 535,333.4Z"><title>No contributions on 14 Jul 2026</title></path>
+    <path class="o0" d="M604,321.9 627,333.4 604,344.9 581,333.4Z"><title>No contributions on 20 Jul 2026</title></path>
+    <path class="o0" d="M650,321.9 673,333.4 650,344.9 627,333.4Z"><title>No contributions on 26 Jul 2026</title></path>
+    <path class="o0" d="M397,333.4 420,344.9 397,356.4 374,344.9Z"><title>No contributions on 27 Jun 2026</title></path>
+    <path class="o0" d="M443,333.4 466,344.9 443,356.4 420,344.9Z"><title>No contributions on 3 Jul 2026</title></path>
+    <path class="o0" d="M489,333.4 512,344.9 489,356.4 466,344.9Z"><title>No contributions on 9 Jul 2026</title></path>
+    <path class="o0" d="M535,333.4 558,344.9 535,356.4 512,344.9Z"><title>No contributions on 15 Jul 2026</title></path>
+    <path class="o0" d="M581,333.4 604,344.9 581,356.4 558,344.9Z"><title>No contributions on 21 Jul 2026</title></path>
+    <path class="o0" d="M627,333.4 650,344.9 627,356.4 604,344.9Z"><title>No contributions on 27 Jul 2026</title></path>
+    <path class="o0" d="M673,333.4 696,344.9 673,356.4 650,344.9Z"><title>No contributions on 2 Aug 2026</title></path>
+    <path class="o0" d="M420,344.9 443,356.4 420,367.9 397,356.4Z"><title>No contributions on 4 Jul 2026</title></path>
+    <path class="o0" d="M466,344.9 489,356.4 466,367.9 443,356.4Z"><title>No contributions on 10 Jul 2026</title></path>
+    <path class="o0" d="M512,344.9 535,356.4 512,367.9 489,356.4Z"><title>No contributions on 16 Jul 2026</title></path>
+    <path class="o0" d="M558,344.9 581,356.4 558,367.9 535,356.4Z"><title>No contributions on 22 Jul 2026</title></path>
+    <path class="o0" d="M604,344.9 627,356.4 604,367.9 581,356.4Z"><title>No contributions on 28 Jul 2026</title></path>
+    <path class="o0" d="M650,344.9 673,356.4 650,367.9 627,356.4Z"><title>No contributions on 3 Aug 2026</title></path>
+    <path class="o0" d="M696,344.9 719,356.4 696,367.9 673,356.4Z"><title>No contributions on 9 Aug 2026</title></path>
+    <path class="o0" d="M443,356.4 466,367.9 443,379.4 420,367.9Z"><title>No contributions on 11 Jul 2026</title></path>
+    <path class="o0" d="M489,356.4 512,367.9 489,379.4 466,367.9Z"><title>No contributions on 17 Jul 2026</title></path>
+    <path class="o0" d="M535,356.4 558,367.9 535,379.4 512,367.9Z"><title>No contributions on 23 Jul 2026</title></path>
+    <path class="o0" d="M581,356.4 604,367.9 581,379.4 558,367.9Z"><title>No contributions on 29 Jul 2026</title></path>
+    <path class="o0" d="M627,356.4 650,367.9 627,379.4 604,367.9Z"><title>No contributions on 4 Aug 2026</title></path>
+    <path class="o0" d="M673,356.4 696,367.9 673,379.4 650,367.9Z"><title>No contributions on 10 Aug 2026</title></path>
+    <path class="o0" d="M719,356.4 742,367.9 719,379.4 696,367.9Z"><title>No contributions on 16 Aug 2026</title></path>
+    <path class="o0" d="M466,367.9 489,379.4 466,390.9 443,379.4Z"><title>No contributions on 18 Jul 2026</title></path>
+    <path class="o0" d="M512,367.9 535,379.4 512,390.9 489,379.4Z"><title>No contributions on 24 Jul 2026</title></path>
+    <path class="o0" d="M558,367.9 581,379.4 558,390.9 535,379.4Z"><title>No contributions on 30 Jul 2026</title></path>
+    <path class="o0" d="M604,367.9 627,379.4 604,390.9 581,379.4Z"><title>No contributions on 5 Aug 2026</title></path>
+    <path class="o0" d="M650,367.9 673,379.4 650,390.9 627,379.4Z"><title>No contributions on 11 Aug 2026</title></path>
+    <path class="o0" d="M696,367.9 719,379.4 696,390.9 673,379.4Z"><title>No contributions on 17 Aug 2026</title></path>
+    <path class="o0" d="M742,367.9 765,379.4 742,390.9 719,379.4Z"><title>No contributions on 23 Aug 2026</title></path>
+    <path class="o0" d="M489,379.4 512,390.9 489,402.4 466,390.9Z"><title>No contributions on 25 Jul 2026</title></path>
+    <path class="o0" d="M535,379.4 558,390.9 535,402.4 512,390.9Z"><title>No contributions on 31 Jul 2026</title></path>
+    <path class="o0" d="M581,379.4 604,390.9 581,402.4 558,390.9Z"><title>No contributions on 6 Aug 2026</title></path>
+    <path class="o0" d="M627,379.4 650,390.9 627,402.4 604,390.9Z"><title>No contributions on 12 Aug 2026</title></path>
+    <path class="o0" d="M673,379.4 696,390.9 673,402.4 650,390.9Z"><title>No contributions on 18 Aug 2026</title></path>
+    <path class="o0" d="M719,379.4 742,390.9 719,402.4 696,390.9Z"><title>No contributions on 24 Aug 2026</title></path>
+    <path class="o0" d="M765,379.4 788,390.9 765,402.4 742,390.9Z"><title>No contributions on 30 Aug 2026</title></path>
+    <path class="o0" d="M512,390.9 535,402.4 512,413.9 489,402.4Z"><title>No contributions on 1 Aug 2026</title></path>
+    <path class="o0" d="M558,390.9 581,402.4 558,413.9 535,402.4Z"><title>No contributions on 7 Aug 2026</title></path>
+    <path class="o0" d="M604,390.9 627,402.4 604,413.9 581,402.4Z"><title>No contributions on 13 Aug 2026</title></path>
+    <path class="o0" d="M650,390.9 673,402.4 650,413.9 627,402.4Z"><title>No contributions on 19 Aug 2026</title></path>
+    <path class="l1" d="M673,396.4 696,407.9 696,413.9 673,402.4Z"/><path class="r1" d="M696,407.9 719,396.4 719,402.4 696,413.9Z"/><path class="o1" d="M696,384.9 719,396.4 696,407.9 673,396.4Z"><title>2 contributions on 25 Aug 2026</title></path>
+    <path class="o0" d="M742,390.9 765,402.4 742,413.9 719,402.4Z"><title>No contributions on 31 Aug 2026</title></path>
+    <path class="o0" d="M788,390.9 811,402.4 788,413.9 765,402.4Z"><title>No contributions on 6 Sep 2026</title></path>
+    <path class="o0" d="M535,402.4 558,413.9 535,425.4 512,413.9Z"><title>No contributions on 8 Aug 2026</title></path>
+    <path class="l1" d="M558,408.44 581,419.94 581,425.4 558,413.9Z"/><path class="r1" d="M581,419.94 604,408.44 604,413.9 581,425.4Z"/><path class="o1" d="M581,396.94 604,408.44 581,419.94 558,408.44Z"><title>1 contribution on 14 Aug 2026</title></path>
+    <path class="l2" d="M604,388.46 627,399.96 627,425.4 604,413.9Z"/><path class="r2" d="M627,399.96 650,388.46 650,413.9 627,425.4Z"/><path class="o2" d="M627,376.96 650,388.46 627,399.96 604,388.46Z"><title>95 contributions on 20 Aug 2026</title></path>
+    <path class="l4" d="M650,376.19 673,387.69 673,425.4 650,413.9Z"/><path class="r4" d="M673,387.69 696,376.19 696,413.9 673,425.4Z"/><path class="o4" d="M673,364.69 696,376.19 673,387.69 650,376.19Z"><title>184 contributions on 26 Aug 2026</title></path>
+    <path class="o0" d="M719,402.4 742,413.9 719,425.4 696,413.9Z"><title>No contributions on 1 Sep 2026</title></path>
+    <path class="o0" d="M765,402.4 788,413.9 765,425.4 742,413.9Z"><title>No contributions on 7 Sep 2026</title></path>
+    <path class="o0" d="M811,402.4 834,413.9 811,425.4 788,413.9Z"><title>No contributions on 13 Sep 2026</title></path>
+    <path class="o0" d="M558,413.9 581,425.4 558,436.9 535,425.4Z"><title>No contributions on 15 Aug 2026</title></path>
+    <path class="l2" d="M581,405.69 604,417.19 604,436.9 581,425.4Z"/><path class="r2" d="M604,417.19 627,405.69 627,425.4 604,436.9Z"/><path class="o2" d="M604,394.19 627,405.69 604,417.19 581,405.69Z"><title>60 contributions on 21 Aug 2026</title></path>
+    <path class="l3" d="M627,393.73 650,405.23 650,436.9 627,425.4Z"/><path class="r3" d="M650,405.23 673,393.73 673,425.4 650,436.9Z"/><path class="o3" d="M650,382.23 673,393.73 650,405.23 627,393.73Z"><title>138 contributions on 27 Aug 2026</title></path>
+    <path class="l3" d="M673,395.97 696,407.47 696,436.9 673,425.4Z"/><path class="r3" d="M696,407.47 719,395.97 719,425.4 696,436.9Z"/><path class="o3" d="M696,384.47 719,395.97 696,407.47 673,395.97Z"><title>122 contributions on 2 Sep 2026</title></path>
+    <path class="o0" d="M742,413.9 765,425.4 742,436.9 719,425.4Z"><title>No contributions on 8 Sep 2026</title></path>
+    <path class="o0" d="M788,413.9 811,425.4 788,436.9 765,425.4Z"><title>No contributions on 14 Sep 2026</title></path>
+    <path class="o0" d="M581,425.4 604,436.9 581,448.4 558,436.9Z"><title>No contributions on 22 Aug 2026</title></path>
+    <path class="l1" d="M604,424.34 627,435.84 627,448.4 604,436.9Z"/><path class="r1" d="M627,435.84 650,424.34 650,436.9 627,448.4Z"/><path class="o1" d="M627,412.84 650,424.34 627,435.84 604,424.34Z"><title>24 contributions on 28 Aug 2026</title></path>
+    <path class="l2" d="M650,415.47 673,426.97 673,448.4 650,436.9Z"/><path class="r2" d="M673,426.97 696,415.47 696,436.9 673,448.4Z"/><path class="o2" d="M673,403.97 696,415.47 673,426.97 650,415.47Z"><title>70 contributions on 3 Sep 2026</title></path>
+    <path class="l2" d="M696,409.65 719,421.15 719,448.4 696,436.9Z"/><path class="r2" d="M719,421.15 742,409.65 742,436.9 719,448.4Z"/><path class="o2" d="M719,398.15 742,409.65 719,421.15 696,409.65Z"><title>107 contributions on 9 Sep 2026</title></path>
+    <path class="o0" d="M765,425.4 788,436.9 765,448.4 742,436.9Z"><title>No contributions on 15 Sep 2026</title></path>
+    <path class="o0" d="M604,436.9 627,448.4 604,459.9 581,448.4Z"><title>No contributions on 29 Aug 2026</title></path>
+    <path class="l2" d="M627,429.04 650,440.54 650,459.9 627,448.4Z"/><path class="r2" d="M650,440.54 673,429.04 673,448.4 650,459.9Z"/><path class="o2" d="M650,417.54 673,429.04 650,440.54 627,429.04Z"><title>58 contributions on 4 Sep 2026</title></path>
+    <path class="l2" d="M673,421.89 696,433.39 696,459.9 673,448.4Z"/><path class="r2" d="M696,433.39 719,421.89 719,448.4 696,459.9Z"/><path class="o2" d="M696,410.39 719,421.89 696,433.39 673,421.89Z"><title>102 contributions on 10 Sep 2026</title></path>
+    <path class="l1" d="M719,433.44 742,444.94 742,459.9 719,448.4Z"/><path class="r1" d="M742,444.94 765,433.44 765,448.4 742,459.9Z"/><path class="o1" d="M742,421.94 765,433.44 742,444.94 719,433.44Z"><title>35 contributions on 16 Sep 2026</title></path>
+    <path class="o0" d="M627,448.4 650,459.9 627,471.4 604,459.9Z"><title>No contributions on 5 Sep 2026</title></path>
+    <path class="l1" d="M650,443.33 673,454.83 673,471.4 650,459.9Z"/><path class="r1" d="M673,454.83 696,443.33 696,459.9 673,471.4Z"/><path class="o1" d="M673,431.83 696,443.33 673,454.83 650,443.33Z"><title>43 contributions on 11 Sep 2026</title></path>
+    <path class="l1" d="M696,444.12 719,455.62 719,471.4 696,459.9Z"/><path class="r1" d="M719,455.62 742,444.12 742,459.9 719,471.4Z"/><path class="o1" d="M719,432.62 742,444.12 719,455.62 696,444.12Z"><title>39 contributions on 17 Sep 2026</title></path>
+    <path class="o0" d="M650,459.9 673,471.4 650,482.9 627,471.4Z"><title>No contributions on 12 Sep 2026</title></path>
+    <path class="l4" d="M673,430 696,441.5 696,482.9 673,471.4Z"/><path class="r4" d="M696,441.5 719,430 719,471.4 696,482.9Z"/><path class="o4" d="M696,418.5 719,430 696,441.5 673,430Z"><title>214 contributions on 18 Sep 2026</title></path>
+  <text class="klein" x="225" y="97.4">Mar</text>
+  <text class="klein" x="294" y="131.9">Apr</text>
+  <text class="klein" x="386" y="177.9">May</text>
+  <text class="klein" x="501" y="235.4">Jun</text>
+  <text class="klein" x="593" y="281.4">Jul</text>
+  <text class="klein" x="685" y="327.4">Aug</text>
+  <text class="klein" x="800" y="384.9">Sep</text>
+  <text class="klein" text-anchor="end" x="651.6" y="528">Less</text>
+    <path class="o0" d="M670.6,518.5 681.6,524 670.6,529.5 659.6,524Z"/>
+    <path class="l1" d="M688.2,514.15 699.2,519.65 699.2,529.5 688.2,524Z"/><path class="r1" d="M699.2,519.65 710.2,514.15 710.2,524 699.2,529.5Z"/><path class="o1" d="M699.2,508.65 710.2,514.15 699.2,519.65 688.2,514.15Z"/>
+    <path class="l2" d="M716.8,508 727.8,513.5 727.8,529.5 716.8,524Z"/><path class="r2" d="M727.8,513.5 738.8,508 738.8,524 727.8,529.5Z"/><path class="o2" d="M727.8,502.5 738.8,508 727.8,513.5 716.8,508Z"/>
+    <path class="l3" d="M745.4,502.74 756.4,508.24 756.4,529.5 745.4,524Z"/><path class="r3" d="M756.4,508.24 767.4,502.74 767.4,524 756.4,529.5Z"/><path class="o3" d="M756.4,497.24 767.4,502.74 756.4,508.24 745.4,502.74Z"/>
+    <path class="l4" d="M774,498 785,503.5 785,529.5 774,524Z"/><path class="r4" d="M785,503.5 796,498 796,524 785,529.5Z"/><path class="o4" d="M785,492.5 796,498 785,503.5 774,498Z"/>
+  <text class="klein" x="804" y="528">More</text>
+  <text class="fuss" x="52" y="554">15 Mar 2026 – 18 Sep 2026  ·  16 active days  ·  longest streak 4  ·  current streak 3</text>
 </svg>
