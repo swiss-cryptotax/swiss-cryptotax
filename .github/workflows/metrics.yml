@@ -64,6 +64,11 @@ jobs:
           done
           test "$fehlend" -eq 0
 
+      # The renderer against its own fixture, before any token is spent: the
+      # checks name what they check and the mutation that turns each one red.
+      - name: Check the calendar renderer
+        run: node quelle/.github/scripts/pruefe-kalender.mjs quelle/.github/scripts/render-contributions.mjs
+
       # No "id" on metrics steps: the action derives its docker image source from github.action.
       # The blog feed card reads only the public RSS feed. No GitHub token is passed to it.
       - name: Render blog feed card
