@@ -1,7 +1,7 @@
 name: Metrics cards
 
-# Renders the SVG cards shown in README.md with lowlighter/metrics and
-# commits them to the branch "metrics" when they have changed.
+# Renders the SVG cards shown in README.md and commits them to the branch
+# "metrics" when they have changed.
 # Commits outside the default branch do not count as contributions.
 
 on:
@@ -12,6 +12,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/metrics.yml
+      - .github/scripts/render-contributions.mjs
 
 permissions:
   contents: read
@@ -19,6 +20,10 @@ permissions:
 concurrency:
   group: metrics-cards
   cancel-in-progress: false
+
+env:
+  KARTE_HELL: contributions-light.svg
+  KARTE_DUNKEL: contributions-dark.svg
 
 jobs:
   render:
@@ -28,10 +33,36 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Two working copies: "quelle" carries the renderer and the README that
+      # has to reference the cards, "karten" is the branch the cards live on.
+      - name: Check out the default branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: quelle
+
       - name: Check out branch metrics
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: metrics
+          path: karten
+
+      # A card nobody reads is worse than a failing build: the job stops here
+      # when README.md no longer points at the files the renderer writes.
+      - name: Check that README.md references the calendar
+        run: |
+          set -euo pipefail
+          fehlend=0
+          for datei in "$KARTE_HELL" "$KARTE_DUNKEL"; do
+            marke="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/metrics/${datei}"
+            rc=0
+            grep -qF -e "$marke" quelle/README.md || rc=$?
+            case "$rc" in
+              0) echo "README.md references $datei." ;;
+              1) echo "::error::README.md does not reference $marke. Rendering it would change nothing that anyone sees."; fehlend=1 ;;
+              *) echo "::error::grep failed with exit code $rc while looking for $marke."; exit "$rc" ;;
+            esac
+          done
+          test "$fehlend" -eq 0
 
       # No "id" on metrics steps: the action derives its docker image source from github.action.
       # The blog feed card reads only the public RSS feed. No GitHub token is passed to it.
@@ -60,7 +91,8 @@ jobs:
         run: |
           set -euo pipefail
           test -s "/metrics_renders/$CARD"
-          cp "/metrics_renders/$CARD" "$CARD"
+          cp "/metrics_renders/$CARD" "karten/$CARD"
+          cd karten
           git add "$CARD"
           rc=0
           git diff --cached --quiet || rc=$?
@@ -71,19 +103,19 @@ jobs:
           esac
           git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update $CARD"
           git push origin HEAD:metrics
+          git --no-pager show --stat --oneline HEAD
 
-      # The calendar needs a classic personal access token without scopes (secret METRICS_TOKEN).
-      # Without the secret the calendar is skipped; a token with scopes stops the job.
+      # The calendar is read through the GraphQL API, which needs an
+      # authenticated request even for public data: classic personal access
+      # token without scopes, secret METRICS_TOKEN.
       - name: Check METRICS_TOKEN
-        id: token
         env:
           METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
           set -euo pipefail
           if [ -z "${METRICS_TOKEN:-}" ]; then
-            echo "::warning::Secret METRICS_TOKEN is not set. The contribution calendar was not updated."
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            exit 0
+            echo "::error::Secret METRICS_TOKEN is not set. The contribution calendar cannot be read."
+            exit 1
           fi
           headers=$(curl -fsSI -H "Authorization: token ${METRICS_TOKEN}" https://api.github.com/)
           rc=0
@@ -99,40 +131,50 @@ jobs:
             echo "::error::METRICS_TOKEN has scopes ($scopes). Use a classic token without scopes."
             exit 1
           fi
-          echo "ready=true" >> "$GITHUB_OUTPUT"
+          echo "METRICS_TOKEN is a classic token without scopes."
 
-      - name: Render contribution calendar card
-        if: steps.token.outputs.ready == 'true'
-        uses: lowlighter/metrics@65836723097537a54cd8eb90f61839426b4266b6 # v3.34
-        with:
-          filename: isocalendar.svg
-          output_action: none
-          token: ${{ secrets.METRICS_TOKEN }}
-          committer_token: NOT_NEEDED
-          user: swiss-cryptotax
-          base: ""
-          notice_releases: no
-          plugins_errors_fatal: yes
-          config_animations: no
-          config_timezone: Europe/Zurich
-          plugin_isocalendar: yes
-          plugin_isocalendar_duration: full-year
-
-      - name: Commit contribution calendar card if changed
-        if: steps.token.outputs.ready == 'true'
+      - name: Render contribution calendar
+        id: kalender
         env:
-          CARD: isocalendar.svg
+          CAL_LOGIN: swiss-cryptotax
+          CAL_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          CAL_OUT_LIGHT: karten/${{ env.KARTE_HELL }}
+          CAL_OUT_DARK: karten/${{ env.KARTE_DUNKEL }}
+          CAL_DAYS: "183"
+          CAL_TZ: Europe/Zurich
         run: |
           set -euo pipefail
-          test -s "/metrics_renders/$CARD"
-          cp "/metrics_renders/$CARD" "$CARD"
-          git add "$CARD"
+          node quelle/.github/scripts/render-contributions.mjs
+          wc -l -c "karten/$KARTE_HELL" "karten/$KARTE_DUNKEL"
+          date -u "+rendered at %Y-%m-%dT%H:%M:%SZ"
+
+      - name: Commit contribution calendar if changed
+        run: |
+          set -euo pipefail
+          cd karten
+          git add -- "$KARTE_HELL" "$KARTE_DUNKEL"
+          # Card of the previous renderer, dropped the first time this runs.
+          if git ls-files --error-unmatch isocalendar.svg > /dev/null 2>&1; then
+            git rm -q -- isocalendar.svg
+          fi
           rc=0
           git diff --cached --quiet || rc=$?
           case "$rc" in
-            0) echo "$CARD unchanged."; exit 0 ;;
+            0)
+              echo "Calendar unchanged: window ${{ steps.kalender.outputs.fenster }}, ${{ steps.kalender.outputs.beitraege }} contributions, same bytes as the committed version."
+              exit 0
+              ;;
             1) ;;
-            *) echo "git diff failed with exit code $rc"; exit "$rc" ;;
+            *) echo "::error::git diff failed with exit code $rc"; exit "$rc" ;;
           esac
-          git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update $CARD"
+          git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update contribution calendar"
           git push origin HEAD:metrics
+          git --no-pager show --stat --oneline HEAD
+          {
+            echo "### Contribution calendar"
+            echo ""
+            echo "- window: ${{ steps.kalender.outputs.fenster }}"
+            echo "- contributions: ${{ steps.kalender.outputs.beitraege }}"
+            echo "- written: $KARTE_HELL and $KARTE_DUNKEL, ${{ steps.kalender.outputs.bytes }} bytes each"
+            echo "- commit: $(git rev-parse --short HEAD) on branch metrics"
+          } >> "$GITHUB_STEP_SUMMARY"

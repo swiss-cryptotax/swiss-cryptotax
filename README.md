@@ -97,5 +97,9 @@ Swiss CryptoTax works together with [Lenherr & Partner AG](https://www.lenherr-p
 ## GitHub activity
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/isocalendar.svg" alt="Contribution calendar of swiss-cryptotax on GitHub for the last twelve months">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/contributions-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/contributions-light.svg">
+  <img src="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/contributions-light.svg" alt="Contribution calendar of swiss-cryptotax on GitHub for the last six months">
+</picture>
 </p>
