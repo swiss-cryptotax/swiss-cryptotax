@@ -104,10 +104,4 @@ Swiss CryptoTax works together with [Lenherr & Partner AG](https://www.lenherr-p
 </picture>
 </p>
 
-Commits per day on the default branch of each swiss-cryptotax repository, merge commits included, counted in Swiss time and refreshed daily.
 
-Colour and height show four levels, split at the quartiles of the days with commits.
-GitHub documents the levels of its own calendar as quartiles of the days with contributions ([ContributionLevel](https://docs.github.com/en/graphql/reference/users#contributionlevel)) but not how it computes them, so the rule here is our own reconstruction:
-the quartiles are interpolated linearly between the sorted counts (the default method of R and NumPy), a day up to the first quartile is on level 1, up to the second on level 2, up to the third on level 3, and above it on level 4.
-Days with the same count share a level; if every day has the same count, all of them are on level 1.
-The total in the header and the count in the title of each block are exact.
