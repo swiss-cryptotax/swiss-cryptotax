@@ -463,7 +463,10 @@ pruefe(
 // busy day no longer presses all others onto the lowest level.
 // MUTATIONS that break it: the height drawn linear to the count again, and every
 // day with commits nailed to level 1.
-// PROBE: a fixture with one day of 1000 commits among many days of 1 to 20.
+// PROBE: a fixture with one day of 1000 commits among many days of 1 to 20. As
+// an edge case, a fixture with only two days with commits, one of them strong:
+// the rule puts the weak day on level 1 and the strong one on level 4, and the
+// check must stay green there as long as the renderer follows the rule.
 const stufenFixture = []
 for (let i = 400; i >= 0; i--) {
   const tag = new Date(new Date(`${heute}T00:00:00Z`).getTime() - i * 86400000).toISOString().slice(0, 10)
@@ -472,10 +475,15 @@ for (let i = 400; i >= 0; i--) {
 const stufenDatei = join(arbeit, "stufen.json")
 writeFileSync(stufenDatei, JSON.stringify(stufenFixture))
 const stufenKarte = rendere(stufenDatei, "stufen")
+const vorTagen = n => new Date(new Date(`${heute}T00:00:00Z`).getTime() - n * 86400000).toISOString().slice(0, 10)
+const randFixture = [{date: vorTagen(10), count: 3}, {date: vorTagen(3), count: 1000}]
+const randDatei = join(arbeit, "stufen-rand.json")
+writeFileSync(randDatei, JSON.stringify(randFixture))
+const randKarte = rendere(randDatei, "stufen-rand")
 
 pruefe(
   "stufen-nach-quartilen",
-  "with one day of 1000 commits among days of 1 to 20, every day stands on the level the quartiles of the window give it, each level has one fixed height rising from 1 to 4, the weak days spread over at least three levels, and the strong day stands on level 4",
+  "with one day of 1000 commits among days of 1 to 20, every day stands on the level the quartiles of the window give it, each level has one fixed height rising from 1 to 4, the weak days spread over at least three levels, and the strong day stands on level 4; with only two days with commits, 3 and 1000, the weak one stands on level 1 and the strong one on level 4",
   "draw the height linear to the count again: tag.hoehe = tag.count <= 0 ? 0 : H_MAX * tag.count / hoechst; or nail every day with commits to level 1: const stufe = count => count > 0 ? 1 : 0",
   () => {
     if (stufenKarte.status !== 0)
@@ -493,6 +501,17 @@ pruefe(
         return `${name}: the day of 1000 commits is not in the window`
       if (stark.stufe !== 4)
         return `${name}: the day of 1000 commits stands on level ${stark.stufe}`
+    }
+    if (randKarte.status !== 0)
+      return `the renderer refused the two-day fixture: ${randKarte.stderr.trim()}`
+    const randSoll = new Map(randFixture.map(tag => [tag.date, tag.count]))
+    for (const name of ["light", "dark"]) {
+      const gelesen = stufenLesen(randKarte.quelle[name], randSoll, randKarte.bericht.fenster)
+      if (gelesen.fehler)
+        return `${name}, two days: ${gelesen.fehler}`
+      const stufen = randFixture.map(tag => gelesen.tage.get(tag.date)?.stufe)
+      if (stufen[0] !== 1 || stufen[1] !== 4)
+        return `${name}, two days: 3 commits on level ${stufen[0]}, 1000 commits on level ${stufen[1]}; the rule gives 1 and 4`
     }
     return true
   },
@@ -542,20 +561,18 @@ if (daten) {
   )
   pruefe(
     "stufen-der-daten",
-    `the card drawn from ${daten} puts every day on the level the quartiles of the file over the window give it, one fixed height per level, and the days with commits other than the busiest one do not all stand on level 1`,
+    `the card drawn from ${daten} puts every day on the level the quartiles of the file over the window give it, at the fixed height of its level`,
     "nail every day with commits to level 1: const stufe = count => count > 0 ? 1 : 0",
     () => {
       if (echt.status !== 0)
         return `the renderer refused the data file: ${echt.stderr.trim()}`
       const soll = new Map(JSON.parse(readFileSync(daten, "utf8")).map(tag => [tag.date, tag.count]))
-      const gelesen = stufenLesen(echt.quelle.light, soll, echt.bericht.fenster)
-      if (gelesen.fehler)
-        return gelesen.fehler
-      const aktiv = [...gelesen.tage.values()].filter(tag => tag.n > 0).sort((links, rechts) => rechts.n - links.n)
-      if (aktiv.length < 2)
-        return `${aktiv.length} day(s) with commits in the window: the levels cannot be compared`
-      if (aktiv.slice(1).every(tag => tag.stufe === 1))
-        return `all ${aktiv.length - 1} days with commits besides the busiest (${aktiv[0].n}) stand on level 1`
+      let gelesen
+      for (const name of ["light", "dark"]) {
+        gelesen = stufenLesen(echt.quelle[name], soll, echt.bericht.fenster)
+        if (gelesen.fehler)
+          return `${name}: ${gelesen.fehler}`
+      }
       const stufen = [...gelesen.tage].filter(([, tag]) => tag.n > 0).sort(([x], [y]) => x < y ? -1 : 1).map(([iso, tag]) => `${iso}:${tag.n}:${tag.stufe}`)
       console.log(`stufen der daten, quartile ${gelesen.quartile.join(" / ")}: ${stufen.join(" ")}`)
       return true
