@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="880" height="568" viewBox="0 0 880 568" role="img" aria-label="15 contributions in the last 6 months">
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="568" viewBox="0 0 880 568" role="img" aria-label="1,027 contributions in the last 6 months">
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
     .kopf { font-size: 17px; font-weight: 600; fill: #E6E9F2; }
@@ -10,7 +10,7 @@
     .o3 { fill: #8A93B8; } .r3 { fill: #6c7390; } .l3 { fill: #4d5267; }
     .o4 { fill: #CFBDA2; } .r4 { fill: #a1937e; } .l4 { fill: #746a5b; }
   </style>
-  <text class="kopf" x="52" y="26">15 contributions in the last 6 months</text>
+  <text class="kopf" x="52" y="26">1,027 contributions in the last 6 months</text>
     <path class="o0" d="M213,104.21 234.39,114.9 213,125.6 191.61,114.9Z"><title>No contributions on 22 Mar 2026</title></path>
     <path class="o0" d="M190,115.71 211.39,126.4 190,137.1 168.61,126.4Z"><title>No contributions on 23 Mar 2026</title></path>
     <path class="o0" d="M236,115.71 257.39,126.4 236,137.1 214.61,126.4Z"><title>No contributions on 29 Mar 2026</title></path>
@@ -162,40 +162,41 @@
     <path class="o0" d="M535,380.21 556.39,390.9 535,401.6 513.61,390.9Z"><title>No contributions on 7 Aug 2026</title></path>
     <path class="o0" d="M581,380.21 602.39,390.9 581,401.6 559.61,390.9Z"><title>No contributions on 13 Aug 2026</title></path>
     <path class="o0" d="M627,380.21 648.39,390.9 627,401.6 605.61,390.9Z"><title>No contributions on 19 Aug 2026</title></path>
-    <path class="l1" d="M651.61,376.88 673,387.57 673,401.6 651.61,390.9Z"/><path class="r1" d="M673,387.57 694.39,376.88 694.39,390.9 673,401.6Z"/><path class="o1" d="M673,366.18 694.39,376.88 673,387.57 651.61,376.88Z"><title>1 contribution on 25 Aug 2026</title></path>
+    <path class="l1" d="M651.61,385.72 673,396.42 673,401.6 651.61,390.9Z"/><path class="r1" d="M673,396.42 694.39,385.72 694.39,390.9 673,401.6Z"/><path class="o1" d="M673,375.03 694.39,385.72 673,396.42 651.61,385.72Z"><title>2 contributions on 25 Aug 2026</title></path>
     <path class="o0" d="M719,380.21 740.39,390.9 719,401.6 697.61,390.9Z"><title>No contributions on 31 Aug 2026</title></path>
     <path class="o0" d="M765,380.21 786.39,390.9 765,401.6 743.61,390.9Z"><title>No contributions on 6 Sep 2026</title></path>
     <path class="o0" d="M512,391.71 533.39,402.4 512,413.1 490.61,402.4Z"><title>No contributions on 8 Aug 2026</title></path>
-    <path class="l1" d="M536.61,388.38 558,399.07 558,413.1 536.61,402.4Z"/><path class="r1" d="M558,399.07 579.39,388.38 579.39,402.4 558,413.1Z"/><path class="o1" d="M558,377.68 579.39,388.38 558,399.07 536.61,388.38Z"><title>1 contribution on 14 Aug 2026</title></path>
-    <path class="l4" d="M582.61,361 604,371.7 604,413.1 582.61,402.4Z"/><path class="r4" d="M604,371.7 625.39,361 625.39,402.4 604,413.1Z"/><path class="o4" d="M604,350.31 625.39,361 604,371.7 582.61,361Z"><title>7 contributions on 20 Aug 2026</title></path>
+    <path class="l1" d="M536.61,397.44 558,408.14 558,413.1 536.61,402.4Z"/><path class="r1" d="M558,408.14 579.39,397.44 579.39,402.4 558,413.1Z"/><path class="o1" d="M558,386.75 579.39,397.44 558,408.14 536.61,397.44Z"><title>1 contribution on 14 Aug 2026</title></path>
+    <path class="l1" d="M582.61,396.27 604,406.97 604,413.1 582.61,402.4Z"/><path class="r1" d="M604,406.97 625.39,396.27 625.39,402.4 604,413.1Z"/><path class="o1" d="M604,385.58 625.39,396.27 604,406.97 582.61,396.27Z"><title>8 contributions on 20 Aug 2026</title></path>
     <path class="o0" d="M650,391.71 671.39,402.4 650,413.1 628.61,402.4Z"><title>No contributions on 26 Aug 2026</title></path>
     <path class="o0" d="M696,391.71 717.39,402.4 696,413.1 674.61,402.4Z"><title>No contributions on 1 Sep 2026</title></path>
     <path class="o0" d="M742,391.71 763.39,402.4 742,413.1 720.61,402.4Z"><title>No contributions on 7 Sep 2026</title></path>
     <path class="o0" d="M788,391.71 809.39,402.4 788,413.1 766.61,402.4Z"><title>No contributions on 13 Sep 2026</title></path>
     <path class="o0" d="M535,403.21 556.39,413.9 535,424.6 513.61,413.9Z"><title>No contributions on 15 Aug 2026</title></path>
-    <path class="l2" d="M559.61,393.99 581,404.68 581,424.6 559.61,413.9Z"/><path class="r2" d="M581,404.68 602.39,393.99 602.39,413.9 581,424.6Z"/><path class="o2" d="M581,383.29 602.39,393.99 581,404.68 559.61,393.99Z"><title>2 contributions on 21 Aug 2026</title></path>
-    <path class="l1" d="M605.61,399.88 627,410.57 627,424.6 605.61,413.9Z"/><path class="r1" d="M627,410.57 648.39,399.88 648.39,413.9 627,424.6Z"/><path class="o1" d="M627,389.18 648.39,399.88 627,410.57 605.61,399.88Z"><title>1 contribution on 27 Aug 2026</title></path>
+    <path class="l1" d="M559.61,408.53 581,419.23 581,424.6 559.61,413.9Z"/><path class="r1" d="M581,419.23 602.39,408.53 602.39,413.9 581,424.6Z"/><path class="o1" d="M581,397.84 602.39,408.53 581,419.23 559.61,408.53Z"><title>3 contributions on 21 Aug 2026</title></path>
+    <path class="l1" d="M605.61,408.94 627,419.64 627,424.6 605.61,413.9Z"/><path class="r1" d="M627,419.64 648.39,408.94 648.39,413.9 627,424.6Z"/><path class="o1" d="M627,398.25 648.39,408.94 627,419.64 605.61,408.94Z"><title>1 contribution on 27 Aug 2026</title></path>
     <path class="o0" d="M673,403.21 694.39,413.9 673,424.6 651.61,413.9Z"><title>No contributions on 2 Sep 2026</title></path>
     <path class="o0" d="M719,403.21 740.39,413.9 719,424.6 697.61,413.9Z"><title>No contributions on 8 Sep 2026</title></path>
     <path class="o0" d="M765,403.21 786.39,413.9 765,424.6 743.61,413.9Z"><title>No contributions on 14 Sep 2026</title></path>
     <path class="o0" d="M811,403.21 832.39,413.9 811,424.6 789.61,413.9Z"><title>No contributions on 20 Sep 2026</title></path>
     <path class="o0" d="M558,414.71 579.39,425.4 558,436.1 536.61,425.4Z"><title>No contributions on 22 Aug 2026</title></path>
     <path class="o0" d="M604,414.71 625.39,425.4 604,436.1 582.61,425.4Z"><title>No contributions on 28 Aug 2026</title></path>
-    <path class="o0" d="M650,414.71 671.39,425.4 650,436.1 628.61,425.4Z"><title>No contributions on 3 Sep 2026</title></path>
+    <path class="l1" d="M628.61,420.22 650,430.92 650,436.1 628.61,425.4Z"/><path class="r1" d="M650,430.92 671.39,420.22 671.39,425.4 650,436.1Z"/><path class="o1" d="M650,409.53 671.39,420.22 650,430.92 628.61,420.22Z"><title>2 contributions on 3 Sep 2026</title></path>
     <path class="o0" d="M696,414.71 717.39,425.4 696,436.1 674.61,425.4Z"><title>No contributions on 9 Sep 2026</title></path>
     <path class="o0" d="M742,414.71 763.39,425.4 742,436.1 720.61,425.4Z"><title>No contributions on 15 Sep 2026</title></path>
     <path class="o0" d="M788,414.71 809.39,425.4 788,436.1 766.61,425.4Z"><title>No contributions on 21 Sep 2026</title></path>
     <path class="o0" d="M581,426.21 602.39,436.9 581,447.6 559.61,436.9Z"><title>No contributions on 29 Aug 2026</title></path>
-    <path class="l1" d="M605.61,422.88 627,433.57 627,447.6 605.61,436.9Z"/><path class="r1" d="M627,433.57 648.39,422.88 648.39,436.9 627,447.6Z"/><path class="o1" d="M627,412.18 648.39,422.88 627,433.57 605.61,422.88Z"><title>1 contribution on 4 Sep 2026</title></path>
-    <path class="l1" d="M651.61,422.88 673,433.57 673,447.6 651.61,436.9Z"/><path class="r1" d="M673,433.57 694.39,422.88 694.39,436.9 673,447.6Z"/><path class="o1" d="M673,412.18 694.39,422.88 673,433.57 651.61,422.88Z"><title>1 contribution on 10 Sep 2026</title></path>
+    <path class="l1" d="M605.61,430.04 627,440.74 627,447.6 605.61,436.9Z"/><path class="r1" d="M627,440.74 648.39,430.04 648.39,436.9 627,447.6Z"/><path class="o1" d="M627,419.35 648.39,430.04 627,440.74 605.61,430.04Z"><title>14 contributions on 4 Sep 2026</title></path>
+    <path class="l1" d="M651.61,431.94 673,442.64 673,447.6 651.61,436.9Z"/><path class="r1" d="M673,442.64 694.39,431.94 694.39,436.9 673,447.6Z"/><path class="o1" d="M673,421.25 694.39,431.94 673,442.64 651.61,431.94Z"><title>1 contribution on 10 Sep 2026</title></path>
     <path class="o0" d="M719,426.21 740.39,436.9 719,447.6 697.61,436.9Z"><title>No contributions on 16 Sep 2026</title></path>
     <path class="o0" d="M765,426.21 786.39,436.9 765,447.6 743.61,436.9Z"><title>No contributions on 22 Sep 2026</title></path>
     <path class="o0" d="M604,437.71 625.39,448.4 604,459.1 582.61,448.4Z"><title>No contributions on 5 Sep 2026</title></path>
     <path class="o0" d="M650,437.71 671.39,448.4 650,459.1 628.61,448.4Z"><title>No contributions on 11 Sep 2026</title></path>
-    <path class="l1" d="M674.61,434.38 696,445.07 696,459.1 674.61,448.4Z"/><path class="r1" d="M696,445.07 717.39,434.38 717.39,448.4 696,459.1Z"/><path class="o1" d="M696,423.68 717.39,434.38 696,445.07 674.61,434.38Z"><title>1 contribution on 17 Sep 2026</title></path>
-    <path class="o0" d="M742,437.71 763.39,448.4 742,459.1 720.61,448.4Z"><title>No contributions on 23 Sep 2026</title></path>
+    <path class="l1" d="M674.61,443.44 696,454.14 696,459.1 674.61,448.4Z"/><path class="r1" d="M696,454.14 717.39,443.44 717.39,448.4 696,459.1Z"/><path class="o1" d="M696,432.75 717.39,443.44 696,454.14 674.61,443.44Z"><title>1 contribution on 17 Sep 2026</title></path>
+    <path class="l4" d="M720.61,407 742,417.7 742,459.1 720.61,448.4Z"/><path class="r4" d="M742,417.7 763.39,407 763.39,448.4 742,459.1Z"/><path class="o4" d="M742,396.31 763.39,407 742,417.7 720.61,407Z"><title>755 contributions on 23 Sep 2026</title></path>
     <path class="o0" d="M627,449.21 648.39,459.9 627,470.6 605.61,459.9Z"><title>No contributions on 12 Sep 2026</title></path>
     <path class="o0" d="M673,449.21 694.39,459.9 673,470.6 651.61,459.9Z"><title>No contributions on 18 Sep 2026</title></path>
+    <path class="l2" d="M697.61,438.85 719,449.55 719,470.6 697.61,459.9Z"/><path class="r2" d="M719,449.55 740.39,438.85 740.39,459.9 719,470.6Z"/><path class="o2" d="M719,428.16 740.39,438.85 719,449.55 697.61,438.85Z"><title>239 contributions on 24 Sep 2026</title></path>
     <path class="o0" d="M650,460.71 671.39,471.4 650,482.1 628.61,471.4Z"><title>No contributions on 19 Sep 2026</title></path>
   <text class="klein" x="225" y="97.4">Mar</text>
   <text class="klein" x="271" y="120.4">Apr</text>
@@ -211,5 +212,5 @@
     <path class="l3" d="M745.4,502.74 756.4,508.24 756.4,529.5 745.4,524Z"/><path class="r3" d="M756.4,508.24 767.4,502.74 767.4,524 756.4,529.5Z"/><path class="o3" d="M756.4,497.24 767.4,502.74 756.4,508.24 745.4,502.74Z"/>
     <path class="l4" d="M774,498 785,503.5 785,529.5 774,524Z"/><path class="r4" d="M785,503.5 796,498 796,524 785,529.5Z"/><path class="o4" d="M785,492.5 796,498 785,503.5 774,498Z"/>
   <text class="klein" x="804" y="528">More</text>
-  <text class="fuss" x="52" y="554">22 Mar 2026 – 23 Sep 2026  ·  8 active days  ·  longest streak 2  ·  current streak 0</text>
+  <text class="fuss" x="52" y="554">22 Mar 2026 – 24 Sep 2026  ·  11 active days  ·  longest streak 2  ·  current streak 2</text>
 </svg>
