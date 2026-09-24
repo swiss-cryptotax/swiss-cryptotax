@@ -125,6 +125,78 @@ const anzahl = titel => {
 }
 const datum = titel => titel.replace(/^.* on /, "")
 
+// Day and count of a lid, read back from its title apart from the renderer's
+// own formatting.
+const MONATE = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const TITEL = new RegExp(`^(?:No commits|([\\d,]+) commits?) on (\\d{1,2}) (${MONATE.join("|")}) (\\d{4})$`)
+const titelLesen = titel => {
+  const t = titel.match(TITEL)
+  if (!t)
+    return null
+  return {iso: `${t[4]}-${String(MONATE.indexOf(t[3]) + 1).padStart(2, "0")}-${t[2].padStart(2, "0")}`, n: t[1] ? Number(t[1].replace(/,/g, "")) : 0}
+}
+
+// The sum in the header and the active days in the footer, as numbers.
+const kopfZahl = text => {
+  const t = text.match(/<text class="kopf"[^>]*>([\d,]+) commits? in the last \d+ months<\/text>/)
+  return t ? Number(t[1].replace(/,/g, "")) : null
+}
+const fussAktiv = text => {
+  const t = text.match(/<text class="fuss"[^>]*>[^<]*?(\d+) active days?[^<]*<\/text>/)
+  return t ? Number(t[1]) : null
+}
+
+// Quartiles of type 7 (Hyndman and Fan; the default of R and NumPy), written
+// here apart from the renderer: the k-th quartile of n sorted counts lies at the
+// 1-based rank h = 1 + (n - 1) * k / 4, interpolated between the neighbours of h.
+const quartile = zahlen => {
+  const x = [...zahlen].sort((links, rechts) => links - rechts)
+  if (!x.length)
+    return [0, 0, 0]
+  return [1, 2, 3].map(k => {
+    const h = 1 + (x.length - 1) * k / 4
+    const unten = x[Math.floor(h) - 1], oben = x[Math.ceil(h) - 1]
+    return unten + (h - Math.floor(h)) * (oben - unten)
+  })
+}
+const sollStufe = (n, [q1, q2, q3]) => n <= 0 ? 0 : n <= q1 ? 1 : n <= q2 ? 2 : n <= q3 ? 3 : 4
+
+// Reads one card against the counts it was drawn from: every lid names the
+// count of its day, stands on the level the quartiles of the window give it,
+// and every level has one height, rising from level to level. Heights are read
+// from rounded coordinates, so two heights count as one within 0.02.
+const stufenLesen = (text, soll, fenster) => {
+  const [von, bis] = fenster.split("..")
+  const q = quartile([...soll].filter(([tag, n]) => tag >= von && tag <= bis && n > 0).map(([, n]) => n))
+  const tage = new Map()
+  for (const block of lies(text).filter(block => block.titel)) {
+    const t = titelLesen(block.titel)
+    if (!t)
+      return {fehler: `a lid carries a title this check cannot read: "${block.titel}"`}
+    const n = soll.get(t.iso) ?? 0
+    if (t.n !== n)
+      return {fehler: `${t.iso}: the card names ${t.n} commits, the data ${n}`}
+    const s = sollStufe(n, q)
+    if (block.stufe !== s)
+      return {fehler: `${t.iso} with ${n} commits is drawn on level ${block.stufe}; the quartiles ${q.join(" / ")} put it on level ${s}`}
+    tage.set(t.iso, {n, stufe: s, hoehe: block.hoehe})
+  }
+  const hoehe = new Map()
+  for (const [iso, tag] of tage) {
+    if (!hoehe.has(tag.stufe))
+      hoehe.set(tag.stufe, tag.hoehe)
+    else if (Math.abs(hoehe.get(tag.stufe) - tag.hoehe) > 0.02)
+      return {fehler: `level ${tag.stufe} is drawn at two heights, ${hoehe.get(tag.stufe)} and ${tag.hoehe} (${iso} with ${tag.n} commits): the height follows the count, not the level`}
+  }
+  if ((hoehe.get(0) ?? 0) !== 0)
+    return {fehler: "a day without commits is drawn raised"}
+  const stufen = [...hoehe.keys()].sort()
+  for (let i = 1; i < stufen.length; i++)
+    if (!(hoehe.get(stufen[i]) > hoehe.get(stufen[i - 1]) + 0.02))
+      return {fehler: `level ${stufen[i]} (height ${hoehe.get(stufen[i])}) is not taller than level ${stufen[i - 1]} (height ${hoehe.get(stufen[i - 1])})`}
+  return {tage, quartile: q}
+}
+
 // ------------------------------------------------------------------ pruefen
 
 const ergebnisse = []
@@ -196,8 +268,8 @@ pruefe(
 
 pruefe(
   "hoehe-folgt-der-zahl",
-  "a day with more commits is drawn as a taller block than a day with fewer, and a day without commits stays flat",
-  "make the height constant: saeule = count => count <= 0 ? 0 : SOCKEL",
+  "a day with more commits is never drawn lower than a day with fewer, days with equal counts stand equally high, and a day without commits stays flat",
+  "make the height constant: tag.hoehe = tag.count > 0 ? HOEHE_STUFE[1] : 0",
   () => {
     const sortiert = [...gitter].sort((links, rechts) => anzahl(links.titel) - anzahl(rechts.titel))
     for (let i = 1; i < sortiert.length; i++) {
@@ -208,8 +280,8 @@ pruefe(
           return `${nk} commits drawn at two heights, ${klein.hoehe} and ${gross.hoehe}`
         continue
       }
-      if (!(gross.hoehe > klein.hoehe))
-        return `${ng} commits at height ${gross.hoehe}, ${nk} commits at height ${klein.hoehe}: more is not taller`
+      if (!(gross.hoehe >= klein.hoehe))
+        return `${ng} commits at height ${gross.hoehe}, ${nk} commits at height ${klein.hoehe}: more is drawn lower`
     }
     const leer = gitter.filter(block => anzahl(block.titel) === 0)
     if (!leer.length)
@@ -356,10 +428,80 @@ pruefe(
   },
 )
 
+pruefe(
+  "zahlen-genau",
+  "the numbers stay exact: the header names the sum of the window, every lid names the count of its day, and the footer names the days with commits",
+  "misstate the sum in the header by one: const kopf = `${zahl(gesamt + 1)} commit…`",
+  () => {
+    const [von, bis] = bericht.fenster.split("..")
+    const soll = fixtureTage.filter(tag => tag.date >= von && tag.date <= bis)
+    const summe = soll.reduce((a, tag) => a + tag.count, 0)
+    const aktiv = soll.filter(tag => tag.count > 0).length
+    for (const name of ["light", "dark"]) {
+      if (kopfZahl(quelle[name]) !== summe)
+        return `${name}: the header names ${kopfZahl(quelle[name])} commits, the window holds ${summe}`
+      if (fussAktiv(quelle[name]) !== aktiv)
+        return `${name}: the footer names ${fussAktiv(quelle[name])} active days, the window holds ${aktiv}`
+    }
+    const zahlen = new Map(soll.map(tag => [tag.date, tag.count]))
+    for (const block of gitter) {
+      const t = titelLesen(block.titel)
+      if (!t)
+        return `a lid carries a title this check cannot read: "${block.titel}"`
+      if (t.n !== (zahlen.get(t.iso) ?? 0))
+        return `${t.iso}: the lid names ${t.n} commits, the fixture ${zahlen.get(t.iso) ?? 0}`
+    }
+    return true
+  },
+)
+
+// ZUSICHERUNG (CEO, 24.09.2026, "3D-Karte, Hoehen in Stufen"): the height of a
+// column follows only the level of its day, one fixed height per level rising
+// from 1 to 4, and the levels split the days with commits in the window at the
+// quartiles of their counts, as GitHub's calendar does: a day at or below Q1 is
+// on level 1, at or below Q2 on 2, at or below Q3 on 3, above Q3 on 4. So one
+// busy day no longer presses all others onto the lowest level.
+// MUTATIONS that break it: the height drawn linear to the count again, and every
+// day with commits nailed to level 1.
+// PROBE: a fixture with one day of 1000 commits among many days of 1 to 20.
+const stufenFixture = []
+for (let i = 400; i >= 0; i--) {
+  const tag = new Date(new Date(`${heute}T00:00:00Z`).getTime() - i * 86400000).toISOString().slice(0, 10)
+  stufenFixture.push({date: tag, count: i === 30 ? 1000 : i % 3 === 0 ? 0 : 1 + (i % 20)})
+}
+const stufenDatei = join(arbeit, "stufen.json")
+writeFileSync(stufenDatei, JSON.stringify(stufenFixture))
+const stufenKarte = rendere(stufenDatei, "stufen")
+
+pruefe(
+  "stufen-nach-quartilen",
+  "with one day of 1000 commits among days of 1 to 20, every day stands on the level the quartiles of the window give it, each level has one fixed height rising from 1 to 4, the weak days spread over at least three levels, and the strong day stands on level 4",
+  "draw the height linear to the count again: tag.hoehe = tag.count <= 0 ? 0 : H_MAX * tag.count / hoechst; or nail every day with commits to level 1: const stufe = count => count > 0 ? 1 : 0",
+  () => {
+    if (stufenKarte.status !== 0)
+      return `the renderer refused the level fixture: ${stufenKarte.stderr.trim()}`
+    const soll = new Map(stufenFixture.map(tag => [tag.date, tag.count]))
+    for (const name of ["light", "dark"]) {
+      const gelesen = stufenLesen(stufenKarte.quelle[name], soll, stufenKarte.bericht.fenster)
+      if (gelesen.fehler)
+        return `${name}: ${gelesen.fehler}`
+      const schwach = new Set([...gelesen.tage.values()].filter(tag => tag.n >= 1 && tag.n <= 20).map(tag => tag.stufe))
+      if (schwach.size < 3)
+        return `${name}: the days of 1 to 20 commits stand on ${schwach.size} level(s) only: ${[...schwach].join(", ")}`
+      const stark = [...gelesen.tage.values()].find(tag => tag.n === 1000)
+      if (!stark)
+        return `${name}: the day of 1000 commits is not in the window`
+      if (stark.stufe !== 4)
+        return `${name}: the day of 1000 commits stands on level ${stark.stufe}`
+    }
+    return true
+  },
+)
+
 if (daten) {
   const echt = rendere(daten, "daten")
-  const monate = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-  const titelMuster = new RegExp(`^(?:No commits|([\\d,]+) commits?) on (\\d{1,2}) (${monate.join("|")}) (\\d{4})$`)
+  const monate = MONATE
+  const titelMuster = TITEL
   pruefe(
     "jeder-tag-der-daten",
     `the card drawn from ${daten} shows every day of its window with the count the file names, and its total is the sum of the file over that window`,
@@ -376,6 +518,9 @@ if (daten) {
         return `the file names no commit in ${echt.bericht.fenster}: there is nothing to compare`
       if (echt.bericht.commits !== summe)
         return `the renderer reports ${echt.bericht.commits} commits for ${echt.bericht.fenster}, the file holds ${summe} there`
+      for (const name of ["light", "dark"])
+        if (kopfZahl(echt.quelle[name]) !== summe)
+          return `${name}: the header names ${kopfZahl(echt.quelle[name])} commits, the file holds ${summe} in ${echt.bericht.fenster}`
       const gezeichnet = new Map()
       for (const block of lies(echt.quelle.light).filter(block => block.titel)) {
         const t = block.titel.match(titelMuster)
@@ -392,6 +537,27 @@ if (daten) {
       for (const [tag, n] of gezeichnet)
         if (n !== (erwartet.get(tag) ?? 0))
           return `the card draws ${n} commits on ${tag}, the file names ${erwartet.get(tag) ?? 0}`
+      return true
+    },
+  )
+  pruefe(
+    "stufen-der-daten",
+    `the card drawn from ${daten} puts every day on the level the quartiles of the file over the window give it, one fixed height per level, and the days with commits other than the busiest one do not all stand on level 1`,
+    "nail every day with commits to level 1: const stufe = count => count > 0 ? 1 : 0",
+    () => {
+      if (echt.status !== 0)
+        return `the renderer refused the data file: ${echt.stderr.trim()}`
+      const soll = new Map(JSON.parse(readFileSync(daten, "utf8")).map(tag => [tag.date, tag.count]))
+      const gelesen = stufenLesen(echt.quelle.light, soll, echt.bericht.fenster)
+      if (gelesen.fehler)
+        return gelesen.fehler
+      const aktiv = [...gelesen.tage.values()].filter(tag => tag.n > 0).sort((links, rechts) => rechts.n - links.n)
+      if (aktiv.length < 2)
+        return `${aktiv.length} day(s) with commits in the window: the levels cannot be compared`
+      if (aktiv.slice(1).every(tag => tag.stufe === 1))
+        return `all ${aktiv.length - 1} days with commits besides the busiest (${aktiv[0].n}) stand on level 1`
+      const stufen = [...gelesen.tage].filter(([, tag]) => tag.n > 0).sort(([x], [y]) => x < y ? -1 : 1).map(([iso, tag]) => `${iso}:${tag.n}:${tag.stufe}`)
+      console.log(`stufen der daten, quartile ${gelesen.quartile.join(" / ")}: ${stufen.join(" ")}`)
       return true
     },
   )

@@ -14,6 +14,26 @@
 // The window ends on the current day in CAL_TZ. A day the file does not name
 // is drawn as a day without commits.
 //
+// Levels. Colour and height of a block show its level, not its count; the
+// count stays exact in the title of every block, and the header and the footer
+// are summed from the counts. GitHub documents the four levels of its calendar
+// as quartiles of the days with contributions (GraphQL API, enum
+// ContributionLevel: "Lowest 25% of days of contributions" up to "Highest 25%",
+// docs.github.com/en/graphql/reference/users#contributionlevel), but not how it
+// computes them. The rule here is our own reconstruction:
+//   - Only the days with commits in the window count. A day without commits is
+//     level 0 and stays flat.
+//   - Q1, Q2 and Q3 of their counts by linear interpolation between the sorted
+//     counts (type 7 of Hyndman and Fan, the default of R and NumPy): the k-th
+//     quartile of n counts lies at the 0-based position (n - 1) * k / 4.
+//   - Level 1 up to and including Q1, level 2 up to Q2, level 3 up to Q3,
+//     level 4 above Q3.
+//   - Equal counts share a level. If every day carries the same count, Q1, Q2
+//     and Q3 equal that count and every day stands on level 1; so does a single
+//     day with commits. With two days of different counts, the lower one is on
+//     level 1 and the higher one on level 4.
+//   - Each level has one fixed height: level s stands s / 4 of the tallest block.
+//
 // Environment:
 //   CAL_DATA      path of commits-daten.json                  (required)
 //   CAL_OUT_LIGHT output path of the light SVG              (required)
@@ -155,15 +175,19 @@ for (let i = tage.length - 1; i >= 0; i--) {
   strecke++
 }
 
-// Four levels over the observed maximum. An empty window keeps every cell at 0.
-const stufe = count => {
-  if (count <= 0)
-    return 0
-  if (hoechst <= 0)
-    return 0
-  const anteil = count / hoechst
-  return anteil <= 0.25 ? 1 : anteil <= 0.5 ? 2 : anteil <= 0.75 ? 3 : 4
+// Four levels at the quartiles of the days with commits, as described at the
+// top of this file. An empty window keeps every cell at 0.
+const aktiveZahlen = tage.filter(tag => tag.count > 0).map(tag => tag.count).sort((x, y) => x - y)
+const quantil = k => {
+  const p = (aktiveZahlen.length - 1) * k / 4
+  const i = Math.floor(p)
+  const naechste = aktiveZahlen[Math.min(i + 1, aktiveZahlen.length - 1)]
+  return aktiveZahlen[i] + (p - i) * (naechste - aktiveZahlen[i])
 }
+const [Q1, Q2, Q3] = aktiveZahlen.length ? [1, 2, 3].map(quantil) : [0, 0, 0]
+const stufe = count => count <= 0 ? 0 : count <= Q1 ? 1 : count <= Q2 ? 2 : count <= Q3 ? 3 : 4
+for (const tag of tage)
+  tag.stufe = stufe(tag.count)
 
 // ------------------------------------------------------------------- zeichnen
 //
@@ -195,7 +219,6 @@ const n2 = wert => {
 const a = Math.round(((BREITE - RAND_LINKS - RAND_RECHTS) / (spalten + 7)) * 100) / 100
 const b = a / 2
 const H_MAX = a * 1.8                      // höchste Säule
-const SOCKEL = a * 0.2                     // jeder Tag mit Beiträgen ist sichtbar erhoben
 const FUGE = 0.93                          // Fuge zwischen den Bloecken: ein leerer Tag bleibt ein Tag
 const ZA = a * FUGE, ZB = b * FUGE
 const X0 = RAND_LINKS + 7 * a              // linkester Punkt des Gitters liegt auf RAND_LINKS
@@ -204,9 +227,10 @@ const BODEN = Y0 + (spalten + 6) * b       // tiefster Punkt des Gitters
 const legendeY = Math.round(BODEN + 30)
 const HOEHE = Math.round(legendeY + 44)
 
-// Height over the observed maximum, slightly compressed so a single busy day
-// does not flatten every other block into the floor.
-const saeule = count => count <= 0 || hoechst <= 0 ? 0 : SOCKEL + (H_MAX - SOCKEL) * Math.pow(count / hoechst, 0.7)
+// One fixed height per level: the height tells the level, the title the count.
+const HOEHE_STUFE = [0, 1, 2, 3, 4].map(s => H_MAX * s / 4)
+for (const tag of tage)
+  tag.hoehe = HOEHE_STUFE[tag.stufe]
 
 // Lid, left face, right face of one block. The drawn rhombus is a little
 // smaller than the step of the grid, so two neighbouring days keep a seam: a
@@ -236,8 +260,7 @@ const nachTiefe = tage
 
 let bloecke = ""
 for (const {tag, c, r} of nachTiefe) {
-  const s = stufe(tag.count)
-  const {seiten, deckel} = block(X0 + (c - r) * a, Y0 + (c + r) * b, ZA, ZB, saeule(tag.count), s)
+  const {seiten, deckel} = block(X0 + (c - r) * a, Y0 + (c + r) * b, ZA, ZB, tag.hoehe, tag.stufe)
   const titel = `${tag.count === 0 ? "No commits" : `${zahl(tag.count)} commit${tag.count === 1 ? "" : "s"}`} on ${langDatum(tag.iso)}`
   bloecke += `\n    ${seiten}${deckel}><title>${esc(titel)}</title></path>`
 }
@@ -254,7 +277,7 @@ const etiketteY = c => {
     const d = spalte - r
     if (d < c || d > c + 2)
       continue
-    oben = Math.min(oben, Y0 + (spalte + r) * b - saeule(tag.count) - b)
+    oben = Math.min(oben, Y0 + (spalte + r) * b - tag.hoehe - b)
   }
   return oben - 6
 }
@@ -273,15 +296,15 @@ for (let c = 0; c < spalten; c++) {
   letzteSpalte = c
 }
 
-// Legend as five blocks of growing height: the card explains its own third
-// dimension instead of leaving the reader to guess what the height means.
+// Legend as five blocks, one per level, at the heights of the levels: the card
+// explains its own third dimension instead of leaving the reader to guess.
 const LEG_A = 11, LEG_B = LEG_A / 2, LEG_H = 26, LEG_SCHRITT = 2.6 * LEG_A
 const legendeBreite = 4 * LEG_SCHRITT + 2 * LEG_A
 const mehrX = BREITE - RAND_RECHTS - 30
 const legendeX = mehrX - 8 - legendeBreite + LEG_A
 let legende = ""
 for (let s = 0; s <= 4; s++) {
-  const h = s === 0 ? 0 : LEG_H * Math.pow(s / 4, 0.7)
+  const h = LEG_H * s / 4
   const {seiten, deckel} = block(legendeX + s * LEG_SCHRITT, legendeY, LEG_A, LEG_B, h, s)
   legende += `\n    ${seiten}${deckel}/>`
 }
@@ -350,6 +373,8 @@ const bericht = {
   commits: gesamt,
   aktive_tage: aktiv,
   hoechster_tag: hoechst,
+  quartile: [Q1, Q2, Q3],
+  stufen: [0, 1, 2, 3, 4].map(s => tage.filter(tag => tag.stufe === s).length),
   laengste_strecke: laengste,
   aktuelle_strecke: strecke,
   zeitpunkt: new Date().toISOString(),
