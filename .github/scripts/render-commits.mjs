@@ -1,17 +1,25 @@
 #!/usr/bin/env node
-// Renders the contribution calendar shown in README.md as a standalone SVG.
+// Renders the commit calendar shown in README.md as a standalone SVG.
 //
-// Data source: GitHub GraphQL contributionsCollection. The window ends on the
-// current day in CAL_TZ, so contributions made today are part of the render.
+// Data source: commits-daten.json on branch metrics, written by a count on the
+// development machine. It counts every commit on the default branch of each
+// swiss-cryptotax repository once, merge commits included, on the day of its
+// author date in Europe/Zurich. The file carries nothing but days and counts:
+//
+//   [{"date":"YYYY-MM-DD","count":N}, ...]
+//
+// Any other form is refused, so a repository name, a commit text or an address
+// can never reach the card. The renderer reads no API and needs no token.
+//
+// The window ends on the current day in CAL_TZ. A day the file does not name
+// is drawn as a day without commits.
 //
 // Environment:
-//   CAL_LOGIN     GitHub login to render                    (required)
-//   CAL_TOKEN     token for the GraphQL query               (required unless CAL_FIXTURE)
+//   CAL_DATA      path of commits-daten.json                  (required)
 //   CAL_OUT_LIGHT output path of the light SVG              (required)
 //   CAL_OUT_DARK  output path of the dark SVG               (required)
 //   CAL_DAYS      length of the window in days, default 183
 //   CAL_TZ        time zone that defines "today", default Europe/Zurich
-//   CAL_FIXTURE   local JSON file [{date,count}, ...] instead of the API (for checks)
 //
 // Exit codes: 0 written, 1 refused. Every refusal names what was missing.
 
@@ -29,11 +37,10 @@ const env = (name, fallback = null) => {
   return value
 }
 
-const login = env("CAL_LOGIN")
+const datei = env("CAL_DATA")
 const ausgaben = {light: env("CAL_OUT_LIGHT"), dark: env("CAL_OUT_DARK")}
 const days = Number(env("CAL_DAYS", "183"))
 const zone = env("CAL_TZ", "Europe/Zurich")
-const fixture = process.env.CAL_FIXTURE || ""
 
 if (!Number.isInteger(days) || days < 7 || days > 366) {
   console.error(`::error::CAL_DAYS must be an integer between 7 and 366, got "${days}".`)
@@ -42,7 +49,7 @@ if (!Number.isInteger(days) || days < 7 || days > 366) {
 
 // ---------------------------------------------------------------- date window
 
-// Today in CAL_TZ, as a plain calendar date. Contributions of the current day
+// Today in CAL_TZ, as a plain calendar date. Commits of the current day
 // belong to the render; a window that stops yesterday looks identical on every
 // re-run of the same day, and a re-run then writes nothing.
 const heute = new Intl.DateTimeFormat("en-CA", {timeZone: zone, year: "numeric", month: "2-digit", day: "2-digit"}).format(new Date())
@@ -58,59 +65,62 @@ const spalten = Math.ceil((Math.round((ende - start) / 86400000) + 1) / 7)
 
 // ---------------------------------------------------------------------- daten
 
-async function ausApi() {
-  const token = env("CAL_TOKEN")
-  const abfrage = `query($login: String!, $von: DateTime!, $bis: DateTime!) {
-    user(login: $login) {
-      contributionsCollection(from: $von, to: $bis) {
-        contributionCalendar {
-          totalContributions
-          weeks { contributionDays { date contributionCount } }
-        }
-      }
-    }
-  }`
-  // The end of the day in CAL_TZ can still lie ahead in UTC; the query never
-  // asks for a point in the future.
-  const tagesende = new Date(`${heute}T23:59:59Z`)
-  const jetzt = new Date()
-  const bis = (tagesende > jetzt ? jetzt : tagesende).toISOString().replace(/[.]\d+Z$/, "Z")
-  const antwort = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {authorization: `bearer ${token}`, "content-type": "application/json", "user-agent": `${login}-contribution-calendar`},
-    body: JSON.stringify({query: abfrage, variables: {login, von: `${isoAus(start)}T00:00:00Z`, bis}}),
+const weg = text => {
+  console.error(`::error::${datei}: ${text}`)
+  process.exit(1)
+}
+
+// "2026-02-30" parses as 2 March; a real day reads back as itself.
+const kalendertag = text => {
+  const zeit = new Date(`${text}T00:00:00Z`).getTime()
+  return !Number.isNaN(zeit) && new Date(zeit).toISOString().slice(0, 10) === text
+}
+
+// The only accepted form. Every entry is an object with exactly the keys date
+// and count, the date is a real calendar day, the count a whole number from 0,
+// and the dates rise strictly, so no day appears twice.
+function liesDaten() {
+  let text, roh
+  try {
+    text = readFileSync(datei, "utf8")
+    roh = JSON.parse(text)
+  } catch (fehler) {
+    weg(`cannot be read as JSON: ${fehler.message}`)
+  }
+  if (!Array.isArray(roh))
+    weg(`must be a JSON array, found ${roh === null ? "null" : typeof roh}.`)
+  if (!roh.length)
+    weg("holds no days.")
+  let vorher = ""
+  roh.forEach((eintrag, i) => {
+    const stelle = `entry ${i + 1}`
+    if (eintrag === null || typeof eintrag !== "object" || Array.isArray(eintrag))
+      weg(`${stelle} is not an object.`)
+    const schluessel = Object.keys(eintrag).sort()
+    if (schluessel.length !== 2 || schluessel[0] !== "count" || schluessel[1] !== "date")
+      weg(`${stelle} carries the keys [${schluessel.join(", ")}], allowed are exactly count and date.`)
+    const {date, count} = eintrag
+    if (typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !kalendertag(date))
+      weg(`${stelle} has no calendar date in the form YYYY-MM-DD: ${JSON.stringify(date)}.`)
+    if (typeof count !== "number" || !Number.isSafeInteger(count) || count < 0)
+      weg(`${stelle} has no whole count from 0: ${JSON.stringify(count)}.`)
+    if (date <= vorher)
+      weg(`${stelle} (${date}) does not follow ${vorher}: the dates must rise, each day once.`)
+    vorher = date
   })
-  if (!antwort.ok) {
-    console.error(`::error::GraphQL request failed: HTTP ${antwort.status} ${antwort.statusText}.`)
-    process.exit(1)
-  }
-  const nutzlast = await antwort.json()
-  if (nutzlast.errors?.length) {
-    for (const fehler of nutzlast.errors)
-      console.error(`::error::GraphQL error: ${fehler.message}`)
-    process.exit(1)
-  }
-  const kalender = nutzlast.data?.user?.contributionsCollection?.contributionCalendar
-  if (!kalender?.weeks?.length) {
-    console.error(`::error::GraphQL answered without a contribution calendar for "${login}". The token may not be allowed to read this user.`)
-    process.exit(1)
-  }
-  return kalender.weeks.flatMap(woche => woche.contributionDays).map(tag => ({date: tag.date, count: tag.contributionCount}))
+  // A key written twice survives JSON.parse, the last one wins, and the first
+  // would carry any text past the checks above. So the file has to be, up to
+  // whitespace, exactly the array it parses to, keys in the order date, count.
+  const kanonisch = JSON.stringify(roh.map(({date, count}) => ({date, count})))
+  if (text.replace(/\s+/g, "") !== kanonisch)
+    weg(`is not, up to whitespace, the plain form [{"date":"YYYY-MM-DD","count":N}, ...]: a key is written twice, the keys stand in another order, or a number is written in another notation.`)
+  return roh
 }
 
-function ausDatei() {
-  const roh = JSON.parse(readFileSync(fixture, "utf8"))
-  if (!Array.isArray(roh) || !roh.length) {
-    console.error(`::error::Fixture ${fixture} holds no days.`)
-    process.exit(1)
-  }
-  return roh.map(tag => ({date: tag.date, count: Number(tag.count) || 0}))
-}
-
-const gemeldet = fixture ? ausDatei() : await ausApi()
+const gemeldet = liesDaten()
 const zaehler = new Map(gemeldet.map(tag => [tag.date, tag.count]))
 
-// The grid is built from the window, not from the answer: a day the API leaves
+// The grid is built from the window, not from the file: a day the file leaves
 // out stays an empty cell instead of shifting every later column by one.
 const tage = []
 for (let i = 0; ; i++) {
@@ -158,7 +168,7 @@ const stufe = count => {
 // ------------------------------------------------------------------- zeichnen
 //
 // Isometric projection, 2:1. Every day is a block: a rhombic lid and, as soon
-// as the day carries contributions, two side faces. The lid of cell (c, r) —
+// as the day carries commits, two side faces. The lid of cell (c, r) —
 // week c, weekday r — sits at
 //
 //   x = X0 + (c - r) * a          a = half width of the rhombus
@@ -200,9 +210,9 @@ const saeule = count => count <= 0 || hoechst <= 0 ? 0 : SOCKEL + (H_MAX - SOCKE
 
 // Lid, left face, right face of one block. The drawn rhombus is a little
 // smaller than the step of the grid, so two neighbouring days keep a seam: a
-// week without contributions has to stay readable as seven days, not as one
+// week without commits has to stay readable as seven days, not as one
 // slab. A block of height 0 is a floor tile and has no side faces: two faces of
-// zero area would still cost bytes and would make "this day has contributions"
+// zero area would still cost bytes and would make "this day has commits"
 // unreadable from the geometry.
 const block = (x, y, halb, halbH, h, s) => {
   const deckel = `<path class="o${s}" d="M${n2(x)},${n2(y - halbH - h)} ${n2(x + halb)},${n2(y - h)} ${n2(x)},${n2(y + halbH - h)} ${n2(x - halb)},${n2(y - h)}Z"`
@@ -228,7 +238,7 @@ let bloecke = ""
 for (const {tag, c, r} of nachTiefe) {
   const s = stufe(tag.count)
   const {seiten, deckel} = block(X0 + (c - r) * a, Y0 + (c + r) * b, ZA, ZB, saeule(tag.count), s)
-  const titel = `${tag.count === 0 ? "No contributions" : `${zahl(tag.count)} contribution${tag.count === 1 ? "" : "s"}`} on ${langDatum(tag.iso)}`
+  const titel = `${tag.count === 0 ? "No commits" : `${zahl(tag.count)} commit${tag.count === 1 ? "" : "s"}`} on ${langDatum(tag.iso)}`
   bloecke += `\n    ${seiten}${deckel}><title>${esc(titel)}</title></path>`
 }
 
@@ -276,7 +286,7 @@ for (let s = 0; s <= 4; s++) {
   legende += `\n    ${seiten}${deckel}/>`
 }
 
-const kopf = `${zahl(gesamt)} contribution${gesamt === 1 ? "" : "s"} in the last ${Math.round(days / 30.5)} months`
+const kopf = `${zahl(gesamt)} commit${gesamt === 1 ? "" : "s"} in the last ${Math.round(days / 30.5)} months`
 const fuss = `${langDatum(isoAus(start))} – ${langDatum(heute)}  ·  ${aktiv} active day${aktiv === 1 ? "" : "s"}  ·  longest streak ${laengste}  ·  current streak ${strecke}`
 
 // Two files instead of one file with a media query: README.md picks the theme
@@ -330,15 +340,14 @@ for (const [name, pfad] of Object.entries(ausgaben)) {
 
 // The report is the proof that the step acted. It names the files, their size,
 // the window and the totals, so a run that writes the same bytes twice is
-// readable as "no new contributions" instead of "nothing happened".
+// readable as "no new commits" instead of "nothing happened".
 const bericht = {
   dateien: geschrieben,
-  quelle: fixture ? `fixture ${fixture}` : "GitHub GraphQL",
-  login,
+  quelle: datei,
   fenster: `${isoAus(start)}..${heute}`,
   tage: tage.length,
   wochen: spalten,
-  beitraege: gesamt,
+  commits: gesamt,
   aktive_tage: aktiv,
   hoechster_tag: hoechst,
   laengste_strecke: laengste,
@@ -347,9 +356,9 @@ const bericht = {
 }
 console.log(`geschrieben ${JSON.stringify(bericht)}`)
 if (gesamt === 0)
-  console.log(`::warning::${login} has no contributions in ${isoAus(start)}..${heute}. The calendar is empty.`)
+  console.log(`::warning::${datei} names no commits in ${isoAus(start)}..${heute}. The calendar is empty.`)
 
 if (process.env.GITHUB_OUTPUT) {
-  const bytes = Object.values(geschrieben).map(datei => datei.bytes).join(" / ")
-  writeFileSync(process.env.GITHUB_OUTPUT, `beitraege=${gesamt}\nfenster=${isoAus(start)}..${heute}\nbytes=${bytes}\n`, {flag: "a"})
+  const bytes = Object.values(geschrieben).map(eintrag => eintrag.bytes).join(" / ")
+  writeFileSync(process.env.GITHUB_OUTPUT, `commits=${gesamt}\nfenster=${isoAus(start)}..${heute}\nbytes=${bytes}\n`, {flag: "a"})
 }

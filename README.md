@@ -94,12 +94,14 @@ More about the firm: [About us](https://www.cryptotax.ch/en/about-us/)
 
 Swiss CryptoTax works together with [Lenherr & Partner AG](https://www.lenherr-partner.ch/).
 
-## GitHub activity
+## Commits
 
 <p align="center">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/contributions-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/contributions-light.svg">
-  <img src="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/contributions-light.svg" width="100%" alt="Isometric contribution calendar of swiss-cryptotax on GitHub for the last six months. Every day is a block: its colour and its height follow the number of contributions of that day.">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/commits-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/commits-light.svg">
+  <img src="https://raw.githubusercontent.com/swiss-cryptotax/swiss-cryptotax/metrics/commits-light.svg" width="100%" alt="Isometric calendar of the commits in the swiss-cryptotax repositories for the last six months. Every day is a block: its colour and its height follow the number of commits of that day.">
 </picture>
 </p>
+
+Commits per day on the default branch of each swiss-cryptotax repository, merge commits included, counted in Swiss time and refreshed daily.

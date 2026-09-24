@@ -12,7 +12,12 @@ on:
     branches: [main]
     paths:
       - .github/workflows/metrics.yml
-      - .github/scripts/render-contributions.mjs
+      - .github/scripts/render-commits.mjs
+      - .github/scripts/pruefe-kalender.mjs
+# A push of commits-daten.json to branch metrics starts this workflow as well,
+# through .github/workflows/commit-data.yml on that branch: a push event runs
+# the workflow files of the pushed commit, and branch metrics carries no copy
+# of this file, so a push trigger for metrics written here would never fire.
 
 permissions:
   contents: read
@@ -22,8 +27,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  KARTE_HELL: contributions-light.svg
-  KARTE_DUNKEL: contributions-dark.svg
+  KARTE_HELL: commits-light.svg
+  KARTE_DUNKEL: commits-dark.svg
+  DATEN: commits-daten.json
 
 jobs:
   render:
@@ -34,7 +40,8 @@ jobs:
       contents: write
     steps:
       # Two working copies: "quelle" carries the renderer and the README that
-      # has to reference the cards, "karten" is the branch the cards live on.
+      # has to reference the cards, "karten" is the branch the cards and the
+      # commit counts live on.
       - name: Check out the default branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -64,10 +71,11 @@ jobs:
           done
           test "$fehlend" -eq 0
 
-      # The renderer against its own fixture, before any token is spent: the
-      # checks name what they check and the mutation that turns each one red.
-      - name: Check the calendar renderer
-        run: node quelle/.github/scripts/pruefe-kalender.mjs quelle/.github/scripts/render-contributions.mjs
+      # The renderer against its own fixture and against the counts it is
+      # about to draw: the checks name what they check and the mutation that
+      # turns each one red.
+      - name: Check the commit calendar renderer and its data
+        run: node quelle/.github/scripts/pruefe-kalender.mjs quelle/.github/scripts/render-commits.mjs "karten/$DATEN"
 
       # No "id" on metrics steps: the action derives its docker image source from github.action.
       # The blog feed card reads only the public RSS feed. No GitHub token is passed to it.
@@ -110,76 +118,53 @@ jobs:
           git push origin HEAD:metrics
           git --no-pager show --stat --oneline HEAD
 
-      # The calendar is read through the GraphQL API, which needs an
-      # authenticated request even for public data: classic personal access
-      # token without scopes, secret METRICS_TOKEN.
-      - name: Check METRICS_TOKEN
-        env:
-          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
-        run: |
-          set -euo pipefail
-          if [ -z "${METRICS_TOKEN:-}" ]; then
-            echo "::error::Secret METRICS_TOKEN is not set. The contribution calendar cannot be read."
-            exit 1
-          fi
-          headers=$(curl -fsSI -H "Authorization: token ${METRICS_TOKEN}" https://api.github.com/)
-          rc=0
-          scopes=$(printf '%s\n' "$headers" | tr -d '\r' | awk 'tolower($1) == "x-oauth-scopes:" { found = 1; sub(/^[^:]*:[ \t]*/, ""); print } END { if (!found) exit 3 }') || rc=$?
-          if [ "$rc" -eq 3 ]; then
-            echo "::error::No x-oauth-scopes header. METRICS_TOKEN must be a classic personal access token."
-            exit 1
-          fi
-          if [ "$rc" -ne 0 ]; then
-            exit "$rc"
-          fi
-          if [ -n "$scopes" ]; then
-            echo "::error::METRICS_TOKEN has scopes ($scopes). Use a classic token without scopes."
-            exit 1
-          fi
-          echo "METRICS_TOKEN is a classic token without scopes."
-
-      - name: Render contribution calendar
+      # The counts come from commits-daten.json on branch metrics, written by
+      # the daily count on the development machine: commits per day on the
+      # default branch of every swiss-cryptotax repository. No API, no token.
+      - name: Render commit calendar
         id: kalender
         env:
-          CAL_LOGIN: swiss-cryptotax
-          CAL_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          CAL_DATA: karten/${{ env.DATEN }}
           CAL_OUT_LIGHT: karten/${{ env.KARTE_HELL }}
           CAL_OUT_DARK: karten/${{ env.KARTE_DUNKEL }}
           CAL_DAYS: "183"
           CAL_TZ: Europe/Zurich
         run: |
           set -euo pipefail
-          node quelle/.github/scripts/render-contributions.mjs
+          node quelle/.github/scripts/render-commits.mjs
           wc -l -c "karten/$KARTE_HELL" "karten/$KARTE_DUNKEL"
           date -u "+rendered at %Y-%m-%dT%H:%M:%SZ"
 
-      - name: Commit contribution calendar if changed
+      - name: Commit commit calendar if changed
         run: |
           set -euo pipefail
           cd karten
           git add -- "$KARTE_HELL" "$KARTE_DUNKEL"
-          # Card of the previous renderer, dropped the first time this runs.
-          if git ls-files --error-unmatch isocalendar.svg > /dev/null 2>&1; then
-            git rm -q -- isocalendar.svg
-          fi
+          # Cards of the contribution calendar this one replaces, dropped the
+          # first time this runs.
+          for alt in contributions-light.svg contributions-dark.svg; do
+            if git ls-files --error-unmatch "$alt" > /dev/null 2>&1; then
+              git rm -q -- "$alt"
+            fi
+          done
           rc=0
           git diff --cached --quiet || rc=$?
           case "$rc" in
             0)
-              echo "Calendar unchanged: window ${{ steps.kalender.outputs.fenster }}, ${{ steps.kalender.outputs.beitraege }} contributions, same bytes as the committed version."
+              echo "Calendar unchanged: window ${{ steps.kalender.outputs.fenster }}, ${{ steps.kalender.outputs.commits }} commits, same bytes as the committed version."
               exit 0
               ;;
             1) ;;
             *) echo "::error::git diff failed with exit code $rc"; exit "$rc" ;;
           esac
-          git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update contribution calendar"
+          git -c user.name=CryptoTax -c user.email=info@cryptotax.ch commit -m "Update commit calendar"
           git push origin HEAD:metrics
           git --no-pager show --stat --oneline HEAD
           {
-            echo "### Contribution calendar"
+            echo "### Commit calendar"
             echo ""
             echo "- window: ${{ steps.kalender.outputs.fenster }}"
-            echo "- contributions: ${{ steps.kalender.outputs.beitraege }}"
+            echo "- commits: ${{ steps.kalender.outputs.commits }}"
             echo "- written: $KARTE_HELL and $KARTE_DUNKEL, ${{ steps.kalender.outputs.bytes }} bytes each"
             echo "- commit: $(git rev-parse --short HEAD) on branch metrics"
           } >> "$GITHUB_STEP_SUMMARY"

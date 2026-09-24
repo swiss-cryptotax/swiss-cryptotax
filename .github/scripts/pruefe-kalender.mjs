@@ -1,22 +1,27 @@
 #!/usr/bin/env node
-// Checks render-contributions.mjs against the promises the card makes.
+// Checks render-commits.mjs against the promises the card makes.
 //
 // Each check names what is checked and the mutation that breaks it. A check
 // without a mutation that turns it red measures whatever is easy to measure,
 // not the promise; the mutation is written down so the next reader can repeat
 // it instead of trusting this comment.
 //
-// Usage: node .github/scripts/pruefe-kalender.mjs [path to render-contributions.mjs]
+// The drawing is checked against a fixture of its own. With a second argument,
+// the data file the card is drawn from is checked as well: the renderer has to
+// draw every day of it with the count the file names.
+//
+// Usage: node .github/scripts/pruefe-kalender.mjs [render-commits.mjs] [commits-daten.json]
 // Exit codes: 0 all checks green, 1 at least one red, 2 the check itself broke.
 
-import {execFileSync} from "node:child_process"
+import {spawnSync} from "node:child_process"
 import {mkdtempSync, writeFileSync, readFileSync, rmSync} from "node:fs"
 import {tmpdir} from "node:os"
 import {join, dirname, resolve} from "node:path"
 import {fileURLToPath} from "node:url"
 
 const hier = dirname(fileURLToPath(import.meta.url))
-const renderer = resolve(process.argv[2] || join(hier, "render-contributions.mjs"))
+const renderer = resolve(process.argv[2] || join(hier, "render-commits.mjs"))
+const daten = process.argv[3] ? resolve(process.argv[3]) : null
 const ZONE = "Europe/Zurich"
 
 // The card that was delivered before this one, as the baseline for "bigger".
@@ -36,7 +41,7 @@ const heute = new Intl.DateTimeFormat("en-CA", {timeZone: ZONE, year: "numeric",
 // A fixture wider than any window the renderer may ask for: days it does not
 // use stay unread, days it uses are all present. Counts rise and fall so the
 // card carries every level and several distinct heights, and the current day
-// carries contributions — a day drawn only when it is empty proves nothing.
+// carries commits — a day drawn only when it is empty proves nothing.
 const fixtureTage = []
 for (let i = 400; i >= 0; i--) {
   const tag = new Date(new Date(`${heute}T00:00:00Z`).getTime() - i * 86400000).toISOString().slice(0, 10)
@@ -46,32 +51,39 @@ for (let i = 400; i >= 0; i--) {
 const fixture = join(arbeit, "fixture.json")
 writeFileSync(fixture, JSON.stringify(fixtureTage))
 
-const pfade = {light: join(arbeit, "light.svg"), dark: join(arbeit, "dark.svg")}
-let ausgabe
-try {
-  ausgabe = execFileSync(process.execPath, [renderer], {
+// Runs the renderer on one data file. Returns its exit status, its output and,
+// when it wrote, the report and both files.
+const rendere = (datenDatei, name) => {
+  const pfade = {light: join(arbeit, `${name}-light.svg`), dark: join(arbeit, `${name}-dark.svg`)}
+  const lauf = spawnSync(process.execPath, [renderer], {
     encoding: "utf8",
     env: {
       ...process.env,
-      CAL_LOGIN: "probe",
+      CAL_DATA: datenDatei,
       CAL_OUT_LIGHT: pfade.light,
       CAL_OUT_DARK: pfade.dark,
-      CAL_FIXTURE: fixture,
       CAL_TZ: ZONE,
       CAL_DAYS: process.env.CAL_DAYS || "183",
       GITHUB_OUTPUT: "",
     },
   })
-} catch (fehler) {
-  abbruch(`The renderer refused to run: ${fehler.stderr || fehler.message}`)
+  if (lauf.error)
+    abbruch(`The renderer could not be started: ${lauf.error.message}`)
+  const ergebnis = {status: lauf.status, stdout: lauf.stdout, stderr: lauf.stderr}
+  if (lauf.status !== 0)
+    return ergebnis
+  const berichtZeile = lauf.stdout.split("\n").find(zeile => zeile.startsWith("geschrieben "))
+  if (!berichtZeile)
+    abbruch(`The renderer wrote no report line for ${name}. Without it the window is unknown and nothing can be checked.`)
+  ergebnis.bericht = JSON.parse(berichtZeile.slice("geschrieben ".length))
+  ergebnis.quelle = {light: readFileSync(pfade.light, "utf8"), dark: readFileSync(pfade.dark, "utf8")}
+  return ergebnis
 }
 
-const berichtZeile = ausgabe.split("\n").find(zeile => zeile.startsWith("geschrieben "))
-if (!berichtZeile)
-  abbruch("The renderer wrote no report line. Without it the window is unknown and nothing can be checked.")
-const bericht = JSON.parse(berichtZeile.slice("geschrieben ".length))
-
-const quelle = {light: readFileSync(pfade.light, "utf8"), dark: readFileSync(pfade.dark, "utf8")}
+const probe = rendere(fixture, "fixture")
+if (probe.status !== 0)
+  abbruch(`The renderer refused its own fixture: ${probe.stderr}`)
+const {bericht, quelle} = probe
 
 // ------------------------------------------------------------------- lesen
 
@@ -108,7 +120,7 @@ const bloecke = {light: lies(quelle.light), dark: lies(quelle.dark)}
 const gitter = bloecke.light.filter(block => block.titel)
 
 const anzahl = titel => {
-  const treffer = titel.match(/^([\d,]+) contributions? on /)
+  const treffer = titel.match(/^([\d,]+) commits? on /)
   return treffer ? Number(treffer[1].replace(/,/g, "")) : 0
 }
 const datum = titel => titel.replace(/^.* on /, "")
@@ -131,7 +143,7 @@ const pruefe = (name, zusicherung, mutation, urteil) => {
 pruefe(
   "groesse",
   `the card is at least ${FAKTOR}x the delivered isometric card of ${ALT_BREITE} x ${ALT_HOEHE} in both dimensions`,
-  "set BREITE in render-contributions.mjs to 470",
+  "set BREITE in render-commits.mjs to 470",
   () => {
     const masse = name => {
       const kopf = quelle[name].match(/<svg[^>]*width="(\d+)"[^>]*height="(\d+)"/)
@@ -177,14 +189,14 @@ pruefe(
     if (!letzter)
       return `no lid carries the current day "${erwartet}"`
     if (letzter.hoehe <= 0)
-      return `the current day carries ${anzahl(letzter.titel)} contributions but is drawn flat`
+      return `the current day carries ${anzahl(letzter.titel)} commits but is drawn flat`
     return true
   },
 )
 
 pruefe(
-  "hoehe-folgt-beitraegen",
-  "a day with more contributions is drawn as a taller block than a day with fewer, and a day without contributions stays flat",
+  "hoehe-folgt-der-zahl",
+  "a day with more commits is drawn as a taller block than a day with fewer, and a day without commits stays flat",
   "make the height constant: saeule = count => count <= 0 ? 0 : SOCKEL",
   () => {
     const sortiert = [...gitter].sort((links, rechts) => anzahl(links.titel) - anzahl(rechts.titel))
@@ -193,11 +205,11 @@ pruefe(
       const nk = anzahl(klein.titel), ng = anzahl(gross.titel)
       if (nk === ng) {
         if (klein.hoehe !== gross.hoehe)
-          return `${nk} contributions drawn at two heights, ${klein.hoehe} and ${gross.hoehe}`
+          return `${nk} commits drawn at two heights, ${klein.hoehe} and ${gross.hoehe}`
         continue
       }
       if (!(gross.hoehe > klein.hoehe))
-        return `${ng} contributions at height ${gross.hoehe}, ${nk} contributions at height ${klein.hoehe}: more is not taller`
+        return `${ng} commits at height ${gross.hoehe}, ${nk} commits at height ${klein.hoehe}: more is not taller`
     }
     const leer = gitter.filter(block => anzahl(block.titel) === 0)
     if (!leer.length)
@@ -249,7 +261,7 @@ pruefe(
 
 pruefe(
   "fuge-zwischen-den-tagen",
-  "two neighbouring days keep a seam between them, so a week without contributions still reads as seven days and not as one slab",
+  "two neighbouring days keep a seam between them, so a week without commits still reads as seven days and not as one slab",
   "draw the blocks at full pitch: ZA = a, ZB = b",
   () => {
     const xWerte = [...new Set(gitter.map(block => block.x))].sort((links, rechts) => links - rechts)
@@ -301,6 +313,90 @@ pruefe(
   },
 )
 
+// Files the renderer has to refuse. Each one differs from an accepted file in
+// one point, and each point is a way a name or a text could reach the card.
+const falscheDaten = [
+  ["an extra key", '[{"date":"2026-09-01","count":3,"repo":"orbit"}]'],
+  ["a key written twice", '[{"date":"a commit message","date":"2026-09-01","count":3}]'],
+  ["keys in another order", '[{"count":3,"date":"2026-09-01"}]'],
+  ["a missing count", '[{"date":"2026-09-01"}]'],
+  ["a count written as text", '[{"date":"2026-09-01","count":"3"}]'],
+  ["a count in another notation", '[{"date":"2026-09-01","count":3e0}]'],
+  ["a negative count", '[{"date":"2026-09-01","count":-1}]'],
+  ["a fractional count", '[{"date":"2026-09-01","count":1.5}]'],
+  ["a date in another form", '[{"date":"01.09.2026","count":3}]'],
+  ["a day that does not exist", '[{"date":"2026-02-30","count":3}]'],
+  ["the same day twice", '[{"date":"2026-09-01","count":3},{"date":"2026-09-01","count":1}]'],
+  ["days out of order", '[{"date":"2026-09-02","count":3},{"date":"2026-09-01","count":1}]'],
+  ["an entry that is not an object", '["orbit"]'],
+  ["an object instead of a list", '{"2026-09-01":3}'],
+  ["an empty list", "[]"],
+]
+
+pruefe(
+  "form-der-daten",
+  "the renderer draws only from a list of {date, count} in exactly that form — one entry per line is accepted — and refuses every other form, so no name and no text reaches the card",
+  "accept whatever parses: let liesDaten return JSON.parse(readFileSync(datei, \"utf8\"))",
+  () => {
+    const zeilen = join(arbeit, "zeilen.json")
+    writeFileSync(zeilen, `[\n${fixtureTage.map(tag => JSON.stringify(tag)).join(",\n")}\n]\n`)
+    const angenommen = rendere(zeilen, "zeilen")
+    if (angenommen.status !== 0)
+      return `the renderer refused the fixture written one entry per line: ${angenommen.stderr.trim()}`
+    for (const [i, [was, inhalt]] of falscheDaten.entries()) {
+      const pfad = join(arbeit, `falsch-${i}.json`)
+      writeFileSync(pfad, inhalt)
+      const lauf = rendere(pfad, `falsch-${i}`)
+      if (lauf.status === 0)
+        return `the renderer drew a file with ${was}: ${inhalt}`
+      if (lauf.status !== 1 || !lauf.stderr.includes("::error::"))
+        return `the renderer ended with status ${lauf.status} and no refusal for a file with ${was}`
+    }
+    return true
+  },
+)
+
+if (daten) {
+  const echt = rendere(daten, "daten")
+  const monate = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  const titelMuster = new RegExp(`^(?:No commits|([\\d,]+) commits?) on (\\d{1,2}) (${monate.join("|")}) (\\d{4})$`)
+  pruefe(
+    "jeder-tag-der-daten",
+    `the card drawn from ${daten} shows every day of its window with the count the file names, and its total is the sum of the file over that window`,
+    "lose one day of the file before drawing, for example after the Map is built: zaehler.delete(gemeldet.at(-1).date)",
+    () => {
+      if (echt.status !== 0)
+        return `the renderer refused the data file: ${echt.stderr.trim()}`
+      const [von, bis] = echt.bericht.fenster.split("..")
+      const erwartet = new Map(JSON.parse(readFileSync(daten, "utf8"))
+        .filter(tag => tag.date >= von && tag.date <= bis)
+        .map(tag => [tag.date, tag.count]))
+      const summe = [...erwartet.values()].reduce((a, b) => a + b, 0)
+      if (summe === 0)
+        return `the file names no commit in ${echt.bericht.fenster}: there is nothing to compare`
+      if (echt.bericht.commits !== summe)
+        return `the renderer reports ${echt.bericht.commits} commits for ${echt.bericht.fenster}, the file holds ${summe} there`
+      const gezeichnet = new Map()
+      for (const block of lies(echt.quelle.light).filter(block => block.titel)) {
+        const t = block.titel.match(titelMuster)
+        if (!t)
+          return `a lid carries a title this check cannot read: "${block.titel}"`
+        const iso = `${t[4]}-${String(monate.indexOf(t[3]) + 1).padStart(2, "0")}-${t[2].padStart(2, "0")}`
+        gezeichnet.set(iso, t[1] ? Number(t[1].replace(/,/g, "")) : 0)
+      }
+      if (gezeichnet.size !== echt.bericht.tage)
+        return `${gezeichnet.size} distinct days drawn, ${echt.bericht.tage} days in the window`
+      for (const [tag, n] of erwartet)
+        if (gezeichnet.get(tag) !== n)
+          return `the file names ${n} commits on ${tag}, the card draws ${gezeichnet.has(tag) ? gezeichnet.get(tag) : "no such day"}`
+      for (const [tag, n] of gezeichnet)
+        if (n !== (erwartet.get(tag) ?? 0))
+          return `the card draws ${n} commits on ${tag}, the file names ${erwartet.get(tag) ?? 0}`
+      return true
+    },
+  )
+}
+
 // ------------------------------------------------------------------ bericht
 
 rmSync(arbeit, {recursive: true, force: true})
@@ -317,5 +413,5 @@ for (const {name, zusicherung, mutation, ok, bemerkung} of ergebnisse) {
     console.error(`::error::${name}: ${bemerkung}`)
   }
 }
-console.log(`${ergebnisse.length - rot} of ${ergebnisse.length} checks green, window ${bericht.fenster}, ${bericht.tage} days, card ${quelle.light.match(/width="(\d+)" height="(\d+)"/).slice(1, 3).join(" x ")}`)
+console.log(`${ergebnisse.length - rot} of ${ergebnisse.length} checks green, window ${bericht.fenster}, ${bericht.tage} days, card ${quelle.light.match(/width="(\d+)" height="(\d+)"/).slice(1, 3).join(" x ")}${daten ? `, data ${daten}` : ", no data file given"}`)
 process.exit(rot ? 1 : 0)
