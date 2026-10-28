@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="880" height="568" viewBox="0 0 880 568" role="img" aria-label="3,601 commits in the last 6 months">
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="568" viewBox="0 0 880 568" role="img" aria-label="3,705 commits in the last 6 months">
   <style>
     text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
     .kopf { font-size: 17px; font-weight: 600; fill: #E6E9F2; }
@@ -10,7 +10,7 @@
     .o3 { fill: #8A93B8; } .r3 { fill: #6c7390; } .l3 { fill: #4d5267; }
     .o4 { fill: #CFBDA2; } .r4 { fill: #a1937e; } .l4 { fill: #746a5b; }
   </style>
-  <text class="kopf" x="52" y="26">3,601 commits in the last 6 months</text>
+  <text class="kopf" x="52" y="26">3,705 commits in the last 6 months</text>
     <path class="o0" d="M213,104.21 234.39,114.9 213,125.6 191.61,114.9Z"><title>No commits on 26 Apr 2026</title></path>
     <path class="o0" d="M190,115.71 211.39,126.4 190,137.1 168.61,126.4Z"><title>No commits on 27 Apr 2026</title></path>
     <path class="o0" d="M236,115.71 257.39,126.4 236,137.1 214.61,126.4Z"><title>No commits on 3 May 2026</title></path>
@@ -152,7 +152,7 @@
     <path class="o0" d="M673,357.21 694.39,367.9 673,378.6 651.61,367.9Z"><title>No commits on 21 Sep 2026</title></path>
     <path class="l1" d="M697.61,357.55 719,368.24 719,378.6 697.61,367.9Z"/><path class="r1" d="M719,368.24 740.39,357.55 740.39,367.9 719,378.6Z"/><path class="o1" d="M719,346.85 740.39,357.55 719,368.24 697.61,357.55Z"><title>2 commits on 27 Sep 2026</title></path>
     <path class="o0" d="M466,368.71 487.39,379.4 466,390.1 444.61,379.4Z"><title>No commits on 29 Aug 2026</title></path>
-    <path class="l2" d="M490.61,358.7 512,369.4 512,390.1 490.61,379.4Z"/><path class="r2" d="M512,369.4 533.39,358.7 533.39,379.4 512,390.1Z"/><path class="o2" d="M512,348.01 533.39,358.7 512,369.4 490.61,358.7Z"><title>58 commits on 4 Sep 2026</title></path>
+    <path class="l3" d="M490.61,348.35 512,359.04 512,390.1 490.61,379.4Z"/><path class="r3" d="M512,359.04 533.39,348.35 533.39,379.4 512,390.1Z"/><path class="o3" d="M512,337.66 533.39,348.35 512,359.04 490.61,348.35Z"><title>58 commits on 4 Sep 2026</title></path>
     <path class="l3" d="M536.61,348.35 558,359.04 558,390.1 536.61,379.4Z"/><path class="r3" d="M558,359.04 579.39,348.35 579.39,379.4 558,390.1Z"/><path class="o3" d="M558,337.66 579.39,348.35 558,359.04 536.61,348.35Z"><title>103 commits on 10 Sep 2026</title></path>
     <path class="l2" d="M582.61,358.7 604,369.4 604,390.1 582.61,379.4Z"/><path class="r2" d="M604,369.4 625.39,358.7 625.39,379.4 604,390.1Z"/><path class="o2" d="M604,348.01 625.39,358.7 604,369.4 582.61,358.7Z"><title>35 commits on 16 Sep 2026</title></path>
     <path class="o0" d="M650,368.71 671.39,379.4 650,390.1 628.61,379.4Z"><title>No commits on 22 Sep 2026</title></path>
@@ -176,26 +176,27 @@
     <path class="l4" d="M559.61,372.5 581,383.2 581,424.6 559.61,413.9Z"/><path class="r4" d="M581,383.2 602.39,372.5 602.39,413.9 581,424.6Z"/><path class="o4" d="M581,361.81 602.39,372.5 581,383.2 559.61,372.5Z"><title>277 commits on 25 Sep 2026</title></path>
     <path class="l3" d="M605.61,382.85 627,393.54 627,424.6 605.61,413.9Z"/><path class="r3" d="M627,393.54 648.39,382.85 648.39,413.9 627,424.6Z"/><path class="o3" d="M627,372.16 648.39,382.85 627,393.54 605.61,382.85Z"><title>65 commits on 1 Oct 2026</title></path>
     <path class="l2" d="M651.61,393.2 673,403.9 673,424.6 651.61,413.9Z"/><path class="r2" d="M673,403.9 694.39,393.2 694.39,413.9 673,424.6Z"/><path class="o2" d="M673,382.51 694.39,393.2 673,403.9 651.61,393.2Z"><title>26 commits on 7 Oct 2026</title></path>
-    <path class="l3" d="M697.61,382.85 719,393.54 719,424.6 697.61,413.9Z"/><path class="r3" d="M719,393.54 740.39,382.85 740.39,413.9 719,424.6Z"/><path class="o3" d="M719,372.16 740.39,382.85 719,393.54 697.61,382.85Z"><title>87 commits on 13 Oct 2026</title></path>
+    <path class="l3" d="M697.61,382.85 719,393.54 719,424.6 697.61,413.9Z"/><path class="r3" d="M719,393.54 740.39,382.85 740.39,413.9 719,424.6Z"/><path class="o3" d="M719,372.16 740.39,382.85 719,393.54 697.61,382.85Z"><title>102 commits on 13 Oct 2026</title></path>
     <path class="o0" d="M765,403.21 786.39,413.9 765,424.6 743.61,413.9Z"><title>No commits on 19 Oct 2026</title></path>
     <path class="o0" d="M811,403.21 832.39,413.9 811,424.6 789.61,413.9Z"><title>No commits on 25 Oct 2026</title></path>
     <path class="l1" d="M536.61,415.05 558,425.74 558,436.1 536.61,425.4Z"/><path class="r1" d="M558,425.74 579.39,415.05 579.39,425.4 558,436.1Z"/><path class="o1" d="M558,404.35 579.39,415.05 558,425.74 536.61,415.05Z"><title>19 commits on 26 Sep 2026</title></path>
-    <path class="l3" d="M582.61,394.35 604,405.04 604,436.1 582.61,425.4Z"/><path class="r3" d="M604,405.04 625.39,394.35 625.39,425.4 604,436.1Z"/><path class="o3" d="M604,383.66 625.39,394.35 604,405.04 582.61,394.35Z"><title>72 commits on 2 Oct 2026</title></path>
+    <path class="l3" d="M582.61,394.35 604,405.04 604,436.1 582.61,425.4Z"/><path class="r3" d="M604,405.04 625.39,394.35 625.39,425.4 604,436.1Z"/><path class="o3" d="M604,383.66 625.39,394.35 604,405.04 582.61,394.35Z"><title>78 commits on 2 Oct 2026</title></path>
     <path class="o0" d="M650,414.71 671.39,425.4 650,436.1 628.61,425.4Z"><title>No commits on 8 Oct 2026</title></path>
-    <path class="l3" d="M674.61,394.35 696,405.04 696,436.1 674.61,425.4Z"/><path class="r3" d="M696,405.04 717.39,394.35 717.39,425.4 696,436.1Z"/><path class="o3" d="M696,383.66 717.39,394.35 696,405.04 674.61,394.35Z"><title>75 commits on 14 Oct 2026</title></path>
+    <path class="l3" d="M674.61,394.35 696,405.04 696,436.1 674.61,425.4Z"/><path class="r3" d="M696,405.04 717.39,394.35 717.39,425.4 696,436.1Z"/><path class="o3" d="M696,383.66 717.39,394.35 696,405.04 674.61,394.35Z"><title>98 commits on 14 Oct 2026</title></path>
     <path class="o0" d="M742,414.71 763.39,425.4 742,436.1 720.61,425.4Z"><title>No commits on 20 Oct 2026</title></path>
     <path class="o0" d="M788,414.71 809.39,425.4 788,436.1 766.61,425.4Z"><title>No commits on 26 Oct 2026</title></path>
     <path class="o0" d="M581,426.21 602.39,436.9 581,447.6 559.61,436.9Z"><title>No commits on 3 Oct 2026</title></path>
     <path class="l2" d="M605.61,416.2 627,426.9 627,447.6 605.61,436.9Z"/><path class="r2" d="M627,426.9 648.39,416.2 648.39,436.9 627,447.6Z"/><path class="o2" d="M627,405.51 648.39,416.2 627,426.9 605.61,416.2Z"><title>27 commits on 9 Oct 2026</title></path>
-    <path class="l1" d="M651.61,426.55 673,437.24 673,447.6 651.61,436.9Z"/><path class="r1" d="M673,437.24 694.39,426.55 694.39,436.9 673,447.6Z"/><path class="o1" d="M673,415.85 694.39,426.55 673,437.24 651.61,426.55Z"><title>16 commits on 15 Oct 2026</title></path>
+    <path class="l2" d="M651.61,416.2 673,426.9 673,447.6 651.61,436.9Z"/><path class="r2" d="M673,426.9 694.39,416.2 694.39,436.9 673,447.6Z"/><path class="o2" d="M673,405.51 694.39,416.2 673,426.9 651.61,416.2Z"><title>32 commits on 15 Oct 2026</title></path>
     <path class="o0" d="M719,426.21 740.39,436.9 719,447.6 697.61,436.9Z"><title>No commits on 21 Oct 2026</title></path>
     <path class="o0" d="M765,426.21 786.39,436.9 765,447.6 743.61,436.9Z"><title>No commits on 27 Oct 2026</title></path>
     <path class="o0" d="M604,437.71 625.39,448.4 604,459.1 582.61,448.4Z"><title>No commits on 10 Oct 2026</title></path>
-    <path class="l1" d="M628.61,438.05 650,448.74 650,459.1 628.61,448.4Z"/><path class="r1" d="M650,448.74 671.39,438.05 671.39,448.4 650,459.1Z"/><path class="o1" d="M650,427.35 671.39,438.05 650,448.74 628.61,438.05Z"><title>12 commits on 16 Oct 2026</title></path>
+    <path class="l2" d="M628.61,427.7 650,438.4 650,459.1 628.61,448.4Z"/><path class="r2" d="M650,438.4 671.39,427.7 671.39,448.4 650,459.1Z"/><path class="o2" d="M650,417.01 671.39,427.7 650,438.4 628.61,427.7Z"><title>32 commits on 16 Oct 2026</title></path>
     <path class="o0" d="M696,437.71 717.39,448.4 696,459.1 674.61,448.4Z"><title>No commits on 22 Oct 2026</title></path>
+    <path class="o0" d="M742,437.71 763.39,448.4 742,459.1 720.61,448.4Z"><title>No commits on 28 Oct 2026</title></path>
     <path class="o0" d="M627,449.21 648.39,459.9 627,470.6 605.61,459.9Z"><title>No commits on 17 Oct 2026</title></path>
-    <path class="o0" d="M673,449.21 694.39,459.9 673,470.6 651.61,459.9Z"><title>No commits on 23 Oct 2026</title></path>
-    <path class="o0" d="M650,460.71 671.39,471.4 650,482.1 628.61,471.4Z"><title>No commits on 24 Oct 2026</title></path>
+    <path class="l1" d="M651.61,449.55 673,460.24 673,470.6 651.61,459.9Z"/><path class="r1" d="M673,460.24 694.39,449.55 694.39,459.9 673,470.6Z"/><path class="o1" d="M673,438.85 694.39,449.55 673,460.24 651.61,449.55Z"><title>23 commits on 23 Oct 2026</title></path>
+    <path class="l1" d="M628.61,461.05 650,471.74 650,482.1 628.61,471.4Z"/><path class="r1" d="M650,471.74 671.39,461.05 671.39,471.4 650,482.1Z"/><path class="o1" d="M650,450.35 671.39,461.05 650,471.74 628.61,461.05Z"><title>1 commit on 24 Oct 2026</title></path>
   <text class="klein" x="225" y="97.4">Apr</text>
   <text class="klein" x="271" y="120.4">May</text>
   <text class="klein" x="363" y="166.4">Jun</text>
@@ -210,5 +211,5 @@
     <path class="l3" d="M745.4,504.5 756.4,510 756.4,529.5 745.4,524Z"/><path class="r3" d="M756.4,510 767.4,504.5 767.4,524 756.4,529.5Z"/><path class="o3" d="M756.4,499 767.4,504.5 756.4,510 745.4,504.5Z"/>
     <path class="l4" d="M774,498 785,503.5 785,529.5 774,524Z"/><path class="r4" d="M785,503.5 796,498 796,524 785,529.5Z"/><path class="o4" d="M785,492.5 796,498 785,503.5 774,498Z"/>
   <text class="klein" x="804" y="528">More</text>
-  <text class="fuss" x="52" y="554">26 Apr 2026 – 27 Oct 2026  ·  30 active days  ·  longest streak 6  ·  current streak 0</text>
+  <text class="fuss" x="52" y="554">26 Apr 2026 – 28 Oct 2026  ·  32 active days  ·  longest streak 6  ·  current streak 0</text>
 </svg>
