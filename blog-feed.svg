@@ -20,6 +20,15 @@
                                 <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4 8a4 4 0 118 0 4 4 0 01-8 0z"/>
                             </svg>
                             <div class="infos">
+                                <div class="title">Individual Taxation Switzerland: When It Applies</div>
+                                <div class="date">27 Nov 2026</div>
+                            </div>
+                        </div>
+                        <div class="field rss">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4 8a4 4 0 118 0 4 4 0 01-8 0z"/>
+                            </svg>
+                            <div class="infos">
                                 <div class="title">Commercial Crypto Trading: When Crypto Gains Become Taxed</div>
                                 <div class="date">6 Nov 2026</div>
                             </div>
@@ -40,15 +49,6 @@
                             <div class="infos">
                                 <div class="title">Swiss Transparency Register 2026: What Crypto Companies and Investors Need to Know</div>
                                 <div class="date">24 Jun 2026</div>
-                            </div>
-                        </div>
-                        <div class="field rss">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
-                                <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM4 8a4 4 0 118 0 4 4 0 01-8 0z"/>
-                            </svg>
-                            <div class="infos">
-                                <div class="title">CARF and Crypto AEOI in Switzerland: What Investors, Businesses and Banks Need to Know</div>
-                                <div class="date">29 May 2026</div>
                             </div>
                         </div>
                     </section>
